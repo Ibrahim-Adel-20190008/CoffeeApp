@@ -48,7 +48,8 @@ class MainActivity : AppCompatActivity(){
         }
 
         Register.setOnClickListener{
-            //TODO register activity
+            startActivity(Intent(this,RegisterActivity::class.java))
+            finish()
         }
 
 

@@ -1,5 +1,6 @@
 package com.example.finalproject
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -47,7 +48,7 @@ class RegisterActivity : AppCompatActivity() {
                         override fun onResponse(call: Call<RegisterResponse>, response: Response<RegisterResponse>) {
                             if (response.isSuccessful) {
                                 //Toast.makeText(this@RegisterActivity,"please fill all required fields", Toast.LENGTH_SHORT).show()
-
+                                startActivity(Intent(this@RegisterActivity,MainActivity::class.java))
                                 Log.v("3", "onResponse ${response.body().toString()}")
 
                             } else {

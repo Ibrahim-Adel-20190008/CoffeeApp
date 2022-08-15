@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">CoffeeApp</string>
+    <string name="email_hint">your email</string>
+    <string name="password_hint">your password</string>
+    <string name="hint_password">your password</string>
+    <string name="email">Email</string>
+    <string name="password">Password</string>
+    <string name="login">Log In</string>
+    <string name="qs">Forgot Password?</string>
+    <string name="register">Create New Account</string>
+    <string name="or">----------------------OR----------------------</string>
+</resources>

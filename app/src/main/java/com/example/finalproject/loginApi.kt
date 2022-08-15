@@ -1,5 +1,6 @@
 package com.example.finalproject
 
+import com.example.finalproject.dataclasses.RegisterResponse
 import com.example.finalproject.loginClasses.Login
 import com.example.finalproject.loginClasses.LoginResponse
 import com.example.finalproject.loginClasses.User
@@ -17,6 +18,8 @@ interface loginApi {
     fun Login(@Query("email") email: String,
               @Query("password") password: String):
               Call<Login?>?
+    @POST("api/register")
+    fun register(@Body user: User): Call<RegisterResponse>
 }
 
 var retrofit: Retrofit = Retrofit.Builder()

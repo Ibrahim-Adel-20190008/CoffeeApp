@@ -1,3 +1,8 @@
 package com.example.finalproject.loginClasses
 
-data class User (var email: String , var password: String)
+import com.google.gson.annotations.SerializedName
+
+data class User(
+    @SerializedName("email") val email:String,
+    @SerializedName("password") val password:String
+)

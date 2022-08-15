@@ -14,4 +14,7 @@
     <string name="name_info">Name:</string>
     <string name="demo_email">AhmedAli@gmail.com</string>
     <string name="demo_name">Ahmed Ali</string>
+    <string name="create_account">Create Account</string>
+    <string name="username">Username</string>
+    <string name="repeat_password">Repeat Password</string>
 </resources>

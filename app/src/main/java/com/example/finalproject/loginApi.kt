@@ -13,9 +13,10 @@ import retrofit2.http.Query
 
 // https://reqres.in/api/login
 interface loginApi {
-    @POST("api/login")
-    fun Login(@Body user: User):
-              Call<LoginResponse?>?
+    @GET("api/login")
+    fun Login(@Query("email") email: String,
+              @Query("password") password: String):
+              Call<Login?>?
 }
 
 var retrofit: Retrofit = Retrofit.Builder()

@@ -9,4 +9,9 @@
     <string name="qs">Forgot Password?</string>
     <string name="register">Create New Account</string>
     <string name="or">----------------------OR----------------------</string>
+    <string name="hello">Hi User</string>
+    <string name="email_info">Email:</string>
+    <string name="name_info">Name:</string>
+    <string name="demo_email">AhmedAli@gmail.com</string>
+    <string name="demo_name">Ahmed Ali</string>
 </resources>

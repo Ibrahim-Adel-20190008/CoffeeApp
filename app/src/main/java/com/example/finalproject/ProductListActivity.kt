@@ -11,7 +11,7 @@ import com.example.finalproject.dataclasses.CoffeeItem
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.navigation.NavigationView
 
-class ProductListActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItemSelectedListener{
+class ProductListActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItemSelectedListener,ProductListAdapter.onListener{
     var productListAdapter:ProductListAdapter? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -21,7 +21,7 @@ class ProductListActivity : AppCompatActivity(), BottomNavigationView.OnNavigati
         //val layoutManager = GridLayoutManager(this, 2)
         val layoutManager = StaggeredGridLayoutManager(1, RecyclerView.VERTICAL)
         val Coffees = generateCoffeeArray()
-        productListAdapter = ProductListAdapter(Coffees)
+        productListAdapter = ProductListAdapter(Coffees,this)
         val rvCoffees: RecyclerView = findViewById(R.id.rv_coffees)
 
         rvCoffees.layoutManager = layoutManager
@@ -60,5 +60,12 @@ class ProductListActivity : AppCompatActivity(), BottomNavigationView.OnNavigati
                 return false
             }
         }
+    }
+
+    override fun onClick(position: Int) {
+        val coffeeItem = productListAdapter?.Coffees?.get(position)
+        val intent = Intent(this,Preferences::class.java)
+        intent.putExtra("Selected_Item",coffeeItem)
+        startActivity(intent)
     }
 }

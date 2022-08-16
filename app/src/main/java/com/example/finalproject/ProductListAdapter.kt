@@ -9,11 +9,11 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.finalproject.dataclasses.CoffeeItem
 
-class ProductListAdapter(var Coffees: Array<CoffeeItem>):RecyclerView.Adapter<ProductListAdapter.ViewHolder>() {
+class ProductListAdapter(var Coffees: Array<CoffeeItem>, var listener:onListener):RecyclerView.Adapter<ProductListAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val v = LayoutInflater.from(parent.context).inflate(R.layout.card_layout,parent,false)
-        return ViewHolder(v)
+        return ViewHolder(v,listener)
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
@@ -30,17 +30,26 @@ class ProductListAdapter(var Coffees: Array<CoffeeItem>):RecyclerView.Adapter<Pr
         return Coffees.size
     }
 
-    inner class ViewHolder(itemView: View):RecyclerView.ViewHolder(itemView){
+    inner class ViewHolder(itemView: View, listener: onListener):RecyclerView.ViewHolder(itemView),View.OnClickListener{
         var itemImage:ImageView
         var itemTitle:TextView
         var itemNext:TextView
+        var onlistener: onListener
         init {
             itemImage = itemView.findViewById(R.id.item_image)
             itemTitle = itemView.findViewById(R.id.item_title)
             itemNext = itemView.findViewById(R.id.item_next)
+            itemView.setOnClickListener(this)
+            onlistener = listener
+        }
+        override fun onClick(p0: View?) {
+            onlistener.onClick(adapterPosition)
         }
     }
-
+    interface onListener
+    {
+        fun onClick(position: Int)
+    }
 
 
 }

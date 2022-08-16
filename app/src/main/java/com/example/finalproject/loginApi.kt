@@ -14,10 +14,11 @@ import retrofit2.http.Query
 
 // https://reqres.in/api/login
 interface loginApi {
-    @GET("api/login")
+    @POST("api/login")
     fun Login(@Query("email") email: String,
               @Query("password") password: String):
               Call<Login?>?
+
     @POST("api/register")
     fun register(@Body user: User): Call<RegisterResponse>
 }

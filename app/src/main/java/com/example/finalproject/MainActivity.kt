@@ -43,7 +43,8 @@ class MainActivity : AppCompatActivity(){
 //            intent.flags = (Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK)
 
             // start user profile activity
-            val intent = Intent(this, UserProfileActivity::class.java)
+
+            val intent = Intent(this, ProductListActivity::class.java)
             startActivity(intent)
         }
 

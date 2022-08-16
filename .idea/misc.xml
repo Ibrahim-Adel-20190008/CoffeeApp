@@ -12,10 +12,11 @@
         <entry key="..\:/Users/el_re/AndroidStudioProjects/CoffeeApp/app/src/main/res/drawable-mdpi/roundstyle.xml" value="0.11" />
         <entry key="..\:/Users/el_re/AndroidStudioProjects/CoffeeApp/app/src/main/res/drawable/oval_corner.xml" value="0.11" />
         <entry key="..\:/Users/el_re/AndroidStudioProjects/CoffeeApp/app/src/main/res/layout/activity_main.xml" value="0.16145833333333334" />
-        <entry key="..\:/Users/el_re/AndroidStudioProjects/CoffeeApp/app/src/main/res/layout/activity_product_list.xml" value="0.18020833333333333" />
+        <entry key="..\:/Users/el_re/AndroidStudioProjects/CoffeeApp/app/src/main/res/layout/activity_product_list.xml" value="0.2" />
         <entry key="..\:/Users/el_re/AndroidStudioProjects/CoffeeApp/app/src/main/res/layout/activity_register.xml" value="0.234375" />
         <entry key="..\:/Users/el_re/AndroidStudioProjects/CoffeeApp/app/src/main/res/layout/activity_user_profile.xml" value="0.22083333333333333" />
         <entry key="..\:/Users/el_re/AndroidStudioProjects/CoffeeApp/app/src/main/res/layout/card_layout.xml" value="0.17916666666666667" />
+        <entry key="..\:/Users/el_re/AndroidStudioProjects/CoffeeApp/app/src/main/res/menu/nav_menu.xml" value="0.1796875" />
       </map>
     </option>
   </component>

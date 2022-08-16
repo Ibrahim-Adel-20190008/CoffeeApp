@@ -50,7 +50,6 @@ class MainActivity : AppCompatActivity(){
 
         Register.setOnClickListener{
             startActivity(Intent(this,RegisterActivity::class.java))
-            finish()
         }
 
 

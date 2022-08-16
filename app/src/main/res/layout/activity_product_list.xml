@@ -6,6 +6,21 @@
     android:layout_height="match_parent"
     tools:context=".ProductListActivity">
 
+    <FrameLayout
+        android:id="@+id/fl_wrapper"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/bottom_nav"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:menu="@menu/nav_menu"
+        app:itemIconTint="@color/light_cafe"
+        app:itemTextColor="@color/brown"
+        />
+
     <androidx.recyclerview.widget.RecyclerView
         tools:listitem="@layout/card_layout"
         android:id="@+id/rv_coffees"

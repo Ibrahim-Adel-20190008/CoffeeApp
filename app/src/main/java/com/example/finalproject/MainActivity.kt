@@ -70,7 +70,7 @@ class MainActivity : AppCompatActivity(){
     {
         if(SharedPre.getText()!="")
         {
-            val intent = Intent(this, UserProfileActivity::class.java)
+            val intent = Intent(this, ProductListActivity::class.java)
             intent.flags = (Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK)
             startActivity(intent)
         }

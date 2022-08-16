@@ -3,10 +3,6 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
-        <entry key="..\:/Projects/Android Course/CoffeeApp/app/src/main/res/layout/activity_main.xml" value="0.25416666666666665" />
-        <entry key="..\:/Projects/Android Course/CoffeeApp/app/src/main/res/layout/activity_register.xml" value="0.12360688956433637" />
-        <entry key="..\:/Projects/Android Course/CoffeeApp/app/src/main/res/layout/activity_user_profile.xml" value="0.18297101449275363" />
-        <entry key="..\:/Projects/Android Course/CoffeeApp/app/src/main/res/layout/card_layout.xml" value="0.25416666666666665" />
         <entry key="..\:/Projects/Android Course/FinalProject/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.191" />
         <entry key="..\:/Projects/Android Course/FinalProject/app/src/main/res/drawable/oval_button.xml" value="0.191" />
         <entry key="..\:/Projects/Android Course/FinalProject/app/src/main/res/drawable/oval_corner.xml" value="0.209" />
@@ -15,6 +11,7 @@
         <entry key="..\:/Projects/Android Course/FinalProject/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.227" />
         <entry key="..\:/Users/el_re/AndroidStudioProjects/CoffeeApp/app/src/main/res/drawable-mdpi/roundstyle.xml" value="0.11" />
         <entry key="..\:/Users/el_re/AndroidStudioProjects/CoffeeApp/app/src/main/res/drawable/oval_corner.xml" value="0.11" />
+        <entry key="..\:/Users/el_re/AndroidStudioProjects/CoffeeApp/app/src/main/res/layout/activity_cart.xml" value="0.1796875" />
         <entry key="..\:/Users/el_re/AndroidStudioProjects/CoffeeApp/app/src/main/res/layout/activity_main.xml" value="0.16145833333333334" />
         <entry key="..\:/Users/el_re/AndroidStudioProjects/CoffeeApp/app/src/main/res/layout/activity_product_list.xml" value="0.2" />
         <entry key="..\:/Users/el_re/AndroidStudioProjects/CoffeeApp/app/src/main/res/layout/activity_register.xml" value="0.234375" />

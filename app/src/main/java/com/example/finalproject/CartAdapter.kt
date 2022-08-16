@@ -6,9 +6,10 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import com.example.finalproject.dataclasses.CoffeeItemTrial
+import com.bumptech.glide.Glide
+import com.example.finalproject.sharedpref.Item
 
-class CartAdapter(var cartItems:Array<CoffeeItemTrial>): RecyclerView.Adapter<CartAdapter.ViewHolder>() {
+class CartAdapter(var cartItems: ArrayList<Item>?): RecyclerView.Adapter<CartAdapter.ViewHolder>() {
 
     inner class ViewHolder(itemView: View):RecyclerView.ViewHolder(itemView){
         var cartImage: ImageView
@@ -33,13 +34,14 @@ class CartAdapter(var cartItems:Array<CoffeeItemTrial>): RecyclerView.Adapter<Ca
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        val cartItem = cartItems.get(position)
-        holder.cartTitle.text = cartItem.title
-        holder.tvQuantity.text = cartItem.quantity
-        holder.tvPrice.text = cartItem.price
+        val cartItem = cartItems?.get(position)
+        holder.cartTitle.text = cartItem?.name
+        holder.tvQuantityNum.text = cartItem?.quantity.toString()
+        holder.tvPrice.text = cartItem?.totalPrice.toString()
+        Glide.with(holder.itemView)
+            .load(cartItem?.urlToImg)
+            .into(holder.cartImage)
     }
 
-    override fun getItemCount(): Int {
-        return cartItems.size
-    }
+    override fun getItemCount(): Int = cartItems?.size?: 0
 }

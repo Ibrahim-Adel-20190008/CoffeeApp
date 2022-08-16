@@ -11,6 +11,7 @@
       android:layout_height="match_parent">
 
     <LinearLayout
+        android:id="@+id/Linear"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical" >
@@ -56,7 +57,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
 
-            android:text="0.0 EGP"
+            android:text="0.0"
             android:textColor="@color/black"
             android:textStyle="bold"
             android:textSize="18sp"
@@ -70,7 +71,8 @@
   <FrameLayout
       android:id="@+id/fl_wrapper"
       android:layout_width="match_parent"
-      android:layout_height="match_parent" />
+      android:layout_height="match_parent"
+      />
 
   <com.google.android.material.bottomnavigation.BottomNavigationView
       android:id="@+id/bottom_nav"

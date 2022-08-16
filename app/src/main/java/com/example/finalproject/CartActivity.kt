@@ -7,6 +7,7 @@ import android.view.MenuItem
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
 class CartActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItemSelectedListener {
+    var cartAdapter:CartAdapter? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_cart)

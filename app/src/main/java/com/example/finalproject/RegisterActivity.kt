@@ -48,7 +48,7 @@ class RegisterActivity : AppCompatActivity() {
                         override fun onResponse(call: Call<RegisterResponse>, response: Response<RegisterResponse>) {
                             if (response.isSuccessful) {
                                 //Toast.makeText(this@RegisterActivity,"please fill all required fields", Toast.LENGTH_SHORT).show()
-                                startActivity(Intent(this@RegisterActivity,MainActivity::class.java))
+                                finish()
                                 Log.v("3", "onResponse ${response.body().toString()}")
 
                             } else {

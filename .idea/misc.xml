@@ -4,10 +4,8 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/Projects/Android Course/CoffeeApp/app/src/main/res/drawable/circle.xml" value="0.17" />
-        <entry key="..\:/Projects/Android Course/CoffeeApp/app/src/main/res/drawable/coffee_image_background.xml" value="0.139" />
         <entry key="..\:/Projects/Android Course/CoffeeApp/app/src/main/res/drawable/header.xml" value="0.1725" />
         <entry key="..\:/Projects/Android Course/CoffeeApp/app/src/main/res/drawable/non_select_item.xml" value="0.1905" />
-        <entry key="..\:/Projects/Android Course/CoffeeApp/app/src/main/res/drawable/oval_button.xml" value="0.1245" />
         <entry key="..\:/Projects/Android Course/CoffeeApp/app/src/main/res/drawable/select_item.xml" value="0.1905" />
         <entry key="..\:/Projects/Android Course/CoffeeApp/app/src/main/res/layout/action_bar.xml" value="0.18614130434782608" />
         <entry key="..\:/Projects/Android Course/CoffeeApp/app/src/main/res/layout/activity_cart.xml" value="0.25416666666666665" />
@@ -21,7 +19,6 @@
         <entry key="..\:/Projects/Android Course/CoffeeApp/app/src/main/res/layout/activity_user_profile.xml" value="0.18297101449275363" />
         <entry key="..\:/Projects/Android Course/CoffeeApp/app/src/main/res/layout/card_layout.xml" value="0.25416666666666665" />
         <entry key="..\:/Projects/Android Course/CoffeeApp/app/src/main/res/layout/fragment_profile_card.xml" value="0.25416666666666665" />
-        <entry key="..\:/Projects/Android Course/CoffeeApp/app/src/main/res/layout/item_cart.xml" value="0.11302083333333333" />
         <entry key="..\:/Projects/Android Course/CoffeeApp/app/src/main/res/layout/titlebar.xml" value="0.25416666666666665" />
         <entry key="..\:/Projects/Android Course/CoffeeApp/app/src/main/res/layout/toolbar.xml" value="0.2" />
         <entry key="..\:/Projects/Android Course/CoffeeApp/app/src/main/res/mipmap-anydpi-v26/coffee_image.xml" value="0.139" />

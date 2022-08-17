@@ -9,8 +9,8 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.finalproject.dataclasses.CoffeeItem
 
-class ProductListAdapter(var Coffees: Array<CoffeeItem>, var listener:onListener):RecyclerView.Adapter<ProductListAdapter.ViewHolder>() {
-
+class ProductListAdapter( var listener:onListener):RecyclerView.Adapter<ProductListAdapter.ViewHolder>() {
+     var Coffees: ArrayList<CoffeeItem> = arrayListOf()
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val v = LayoutInflater.from(parent.context).inflate(R.layout.card_layout,parent,false)
         return ViewHolder(v,listener)

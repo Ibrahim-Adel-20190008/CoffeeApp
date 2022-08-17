@@ -22,7 +22,7 @@ interface loginApi {
     fun register(@Body user: User): Call<Unit>
 
     @GET("/api/products/all")
-    fun getAllProducts(@Header("Authorization") accessToken: String) : Call<List<CoffeeItem>>
+    fun getAllProducts(@Header("Authorization") accessToken: String) : Call<ArrayList<CoffeeItem>>
 }
 
 var retrofit: Retrofit = Retrofit.Builder()

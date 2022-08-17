@@ -20,12 +20,16 @@
 
     <TextView
         android:id="@+id/cart_title"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
+
         android:layout_marginTop="12dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
         android:text="title"
-        android:textSize="20sp"
+        android:textColor="@color/blue"
+        android:textSize="15sp"
+        app:layout_constraintEnd_toStartOf="@id/item_cart_price"
 
         app:layout_constraintStart_toEndOf="@id/cart_Image"
         app:layout_constraintTop_toTopOf="@id/cart_Image" />
@@ -71,12 +75,12 @@
         android:id="@+id/item_cart_price"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="60dp"
+        android:layout_marginEnd="6dp"
         android:text="0"
-        android:textSize="20sp"
+        android:textSize="15sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="@+id/cart_title"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/tv_egp"
         app:layout_constraintTop_toTopOf="@+id/cart_title"
         app:layout_constraintVertical_bias="0.0" />
 
@@ -86,7 +90,7 @@
         android:layout_height="wrap_content"
         android:layout_marginEnd="16dp"
         android:text="EGP"
-        android:textSize="20sp"
+        android:textSize="15sp"
         app:layout_constraintBottom_toBottomOf="@+id/item_cart_price"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@+id/item_cart_price"

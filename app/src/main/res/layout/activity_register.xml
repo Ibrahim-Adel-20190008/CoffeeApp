@@ -33,7 +33,7 @@
         android:textAlignment="center"
         android:layout_marginTop="48dp"
         android:text="@string/create_account"
-        android:textColor="#827717"
+        android:textColor="@color/splash_color"
         android:textSize="30sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"

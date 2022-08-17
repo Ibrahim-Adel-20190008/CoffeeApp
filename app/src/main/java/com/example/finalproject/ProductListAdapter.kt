@@ -20,6 +20,7 @@ class ProductListAdapter(var Coffees: Array<CoffeeItem>, var listener:onListener
         val coffeeItem = Coffees.get(position)
         holder.itemTitle.text = coffeeItem.name
         holder.itemNext.text=coffeeItem.next
+        holder.itemDescription.text = coffeeItem.description
 
         Glide.with(holder.itemView)
             .load(coffeeItem.urlToImg)
@@ -34,11 +35,13 @@ class ProductListAdapter(var Coffees: Array<CoffeeItem>, var listener:onListener
         var itemImage:ImageView
         var itemTitle:TextView
         var itemNext:TextView
+        var itemDescription:TextView
         var onlistener: onListener
         init {
             itemImage = itemView.findViewById(R.id.item_image)
             itemTitle = itemView.findViewById(R.id.item_title)
             itemNext = itemView.findViewById(R.id.item_next)
+            itemDescription = itemView.findViewById(R.id.item_description)
             itemView.setOnClickListener(this)
             onlistener = listener
         }

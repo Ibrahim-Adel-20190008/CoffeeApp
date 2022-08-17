@@ -24,6 +24,7 @@ interface loginApi {
 
     @GET("/api/products/all")
     fun getAllProducts(@Header("Authorization") accessToken: String) : Call<ArrayList<CoffeeItem>>
+
 }
 val  client =  OkHttpClient.Builder()
     .addInterceptor( HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY))

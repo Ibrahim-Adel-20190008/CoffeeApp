@@ -86,15 +86,14 @@ class UserProfileActivity : AppCompatActivity(), BottomNavigationView.OnNavigati
     }
 
     fun getUserData() {
-        service.getUser("Bearer ${SharedPre.getText()}", SharedPre.getUser()?.email)
+        service.getUser("Bearer ${SharedPre.getText()}", SharedPre.getEmail())
             .enqueue(object : Callback<User> {
                 override fun onResponse(call: Call<User>, response: Response<User>) {
                     if (response.isSuccessful) {
                         val email = response.body()?.email
                         val fullName = response.body()?.username
                         val password = response.body()?.password
-                        SharedPre.setUser(User(fullName, password, email))
-                        displayData()
+                        displayData(User(fullName, password, email))
                     } else {
                         Log.v("401 ", "onResponse ${response.body()}")
                     }
@@ -104,11 +103,10 @@ class UserProfileActivity : AppCompatActivity(), BottomNavigationView.OnNavigati
                 }
             })
     }
-    fun displayData()
+    fun displayData(currentUser:User)
     {
-        val currentUser =SharedPre.getUser()
-        userEmail.text = currentUser?.email
-        userName.text = currentUser?.username
-        hiMsg.text = "Hi ${currentUser?.username}"
+        userEmail.text = currentUser.email
+        userName.text = currentUser.username
+        hiMsg.text = "Hi ${currentUser.username}"
     }
 }

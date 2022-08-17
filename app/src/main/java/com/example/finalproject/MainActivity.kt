@@ -46,13 +46,7 @@ class MainActivity : AppCompatActivity() {
                         if (response.isSuccessful) {
                             if (response.code() == 200) {
                                 SharedPre.setText(response.body()?.token.toString())
-                                SharedPre.setUser(
-                                    User(
-                                        null,
-                                        null,
-                                        response.body()?.email.toString()
-                                    )
-                                )
+                                SharedPre.setEmail(response.body()?.email)
                                 Log.v(
                                     "Logged successfully",
                                     "onResponse ${response.body().toString()}"

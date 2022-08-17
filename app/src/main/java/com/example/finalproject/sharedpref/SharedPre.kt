@@ -15,14 +15,22 @@ object SharedPre {
     {
         return sharedPre?.getString("token",null)
     }
-    fun setUser(newUser:User){
-        val gson = Gson()
-        val json = gson.toJson(newUser)
-        sharedPre?.edit()?.putString("User",json)?.apply()
+    fun setEmail(email:String?)
+    {
+        sharedPre?.edit()?.putString("Email",email)?.apply()
     }
-    fun getUser(): User? {
-        val gson = Gson()
-        val json: String? = sharedPre?.getString("User", "")
-        return gson.fromJson(json, User::class.java)
+    fun getEmail():String?
+    {
+        return sharedPre?.getString("Email",null)
     }
+//    fun setUser(newUser:User){
+//        val gson = Gson()
+//        val json = gson.toJson(newUser)
+//        sharedPre?.edit()?.putString("User",json)?.apply()
+//    }
+//    fun getUser(): User? {
+//        val gson = Gson()
+//        val json: String? = sharedPre?.getString("User", "")
+//        return gson.fromJson(json, User::class.java)
+//    }
 }

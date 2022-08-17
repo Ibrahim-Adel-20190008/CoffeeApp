@@ -5,14 +5,19 @@ import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.MenuItem
 import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.app.ActionBar
 import com.bumptech.glide.Glide
+import com.example.finalproject.loginClasses.User
 import com.example.finalproject.sharedpref.SharedPre
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
 class UserProfileActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItemSelectedListener {
     lateinit var image : ImageView
@@ -33,11 +38,6 @@ class UserProfileActivity : AppCompatActivity(), BottomNavigationView.OnNavigati
         hiMsg = findViewById(R.id.hi)
         arrowBack = findViewById(R.id.arrow_back)
         toolBarText = findViewById(R.id.toolbar_text)
-
-        val currentUser =SharedPre.getUser()
-        userEmail.text = currentUser?.email
-        userName.text = currentUser?.username
-        hiMsg.text = "Hi ${currentUser?.username}"
 
         val bottomNavigationView = findViewById<BottomNavigationView>(R.id.bottom_nav)
         bottomNavigationView.selectedItemId = R.id.ic_profile
@@ -62,7 +62,7 @@ class UserProfileActivity : AppCompatActivity(), BottomNavigationView.OnNavigati
         arrowBack.setOnClickListener {
             finish()
         }
-
+        getUserData()
     }
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
         when(item.itemId){
@@ -85,4 +85,30 @@ class UserProfileActivity : AppCompatActivity(), BottomNavigationView.OnNavigati
         }
     }
 
+    fun getUserData() {
+        service.getUser("Bearer ${SharedPre.getText()}", SharedPre.getUser()?.email)
+            .enqueue(object : Callback<User> {
+                override fun onResponse(call: Call<User>, response: Response<User>) {
+                    if (response.isSuccessful) {
+                        val email = response.body()?.email
+                        val fullName = response.body()?.username
+                        val password = response.body()?.password
+                        SharedPre.setUser(User(fullName, password, email))
+                        displayData()
+                    } else {
+                        Log.v("401 ", "onResponse ${response.body()}")
+                    }
+                }
+                override fun onFailure(call: Call<User>, t: Throwable) {
+                    Log.d("###", "Nothing")
+                }
+            })
+    }
+    fun displayData()
+    {
+        val currentUser =SharedPre.getUser()
+        userEmail.text = currentUser?.email
+        userName.text = currentUser?.username
+        hiMsg.text = "Hi ${currentUser?.username}"
+    }
 }

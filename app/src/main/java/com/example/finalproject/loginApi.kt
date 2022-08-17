@@ -17,7 +17,6 @@ interface loginApi {
     //register fun
     @POST("/api/authentication/create")
     fun register(@Body user: User): Call<Unit>
-
 }
 
 var retrofit: Retrofit = Retrofit.Builder()

@@ -11,7 +11,7 @@
         <entry key="..\:/Projects/Android Course/CoffeeApp/app/src/main/res/layout/activity_details.xml" value="0.25416666666666665" />
         <entry key="..\:/Projects/Android Course/CoffeeApp/app/src/main/res/layout/activity_main.xml" value="0.25416666666666665" />
         <entry key="..\:/Projects/Android Course/CoffeeApp/app/src/main/res/layout/activity_preferences.xml" value="0.264" />
-        <entry key="..\:/Projects/Android Course/CoffeeApp/app/src/main/res/layout/activity_product_list.xml" value="0.16799999999999998" />
+        <entry key="..\:/Projects/Android Course/CoffeeApp/app/src/main/res/layout/activity_product_list.xml" value="0.11302083333333333" />
         <entry key="..\:/Projects/Android Course/CoffeeApp/app/src/main/res/layout/activity_profile_card.xml" value="0.25416666666666665" />
         <entry key="..\:/Projects/Android Course/CoffeeApp/app/src/main/res/layout/activity_register.xml" value="0.12360688956433637" />
         <entry key="..\:/Projects/Android Course/CoffeeApp/app/src/main/res/layout/activity_user_profile.xml" value="0.18297101449275363" />
@@ -26,11 +26,15 @@
         <entry key="..\:/Projects/Android Course/FinalProject/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.227" />
         <entry key="..\:/Users/el_re/AndroidStudioProjects/CoffeeApp/app/src/main/res/drawable-mdpi/roundstyle.xml" value="0.11" />
         <entry key="..\:/Users/el_re/AndroidStudioProjects/CoffeeApp/app/src/main/res/drawable/oval_corner.xml" value="0.11" />
-        <entry key="..\:/Users/el_re/AndroidStudioProjects/CoffeeApp/app/src/main/res/layout/activity_main.xml" value="0.16145833333333334" />
+        <entry key="..\:/Users/el_re/AndroidStudioProjects/CoffeeApp/app/src/main/res/layout/activity_cart.xml" value="0.1875" />
+        <entry key="..\:/Users/el_re/AndroidStudioProjects/CoffeeApp/app/src/main/res/layout/activity_main.xml" value="0.2" />
         <entry key="..\:/Users/el_re/AndroidStudioProjects/CoffeeApp/app/src/main/res/layout/activity_product_list.xml" value="0.18020833333333333" />
-        <entry key="..\:/Users/el_re/AndroidStudioProjects/CoffeeApp/app/src/main/res/layout/activity_register.xml" value="0.234375" />
+        <entry key="..\:/Users/el_re/AndroidStudioProjects/CoffeeApp/app/src/main/res/layout/activity_register.xml" value="0.1" />
         <entry key="..\:/Users/el_re/AndroidStudioProjects/CoffeeApp/app/src/main/res/layout/activity_user_profile.xml" value="0.22083333333333333" />
         <entry key="..\:/Users/el_re/AndroidStudioProjects/CoffeeApp/app/src/main/res/layout/card_layout.xml" value="0.17916666666666667" />
+        <entry key="..\:/Users/el_re/AndroidStudioProjects/CoffeeApp/app/src/main/res/layout/cart_card_layout.xml" value="0.24895833333333334" />
+        <entry key="..\:/Users/el_re/AndroidStudioProjects/CoffeeApp/app/src/main/res/layout/item_cart.xml" value="0.24818840579710144" />
+        <entry key="..\:/Users/el_re/AndroidStudioProjects/CoffeeApp/app/src/main/res/menu/nav_menu.xml" value="0.1796875" />
       </map>
     </option>
   </component>

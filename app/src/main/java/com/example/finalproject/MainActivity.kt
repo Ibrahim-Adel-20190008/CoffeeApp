@@ -51,7 +51,6 @@ class MainActivity : AppCompatActivity(){
                         }
                         else if(response.code()==401) {
                             Toast.makeText(applicationContext,"Wrong Email or Password",Toast.LENGTH_SHORT).show()
-
                         }
                         else{
                             Log.v("not 401 or 200", "onResponse ${response.code()}")

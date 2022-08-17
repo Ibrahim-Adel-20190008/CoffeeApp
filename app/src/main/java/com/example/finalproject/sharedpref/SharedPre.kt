@@ -5,7 +5,7 @@ import android.content.SharedPreferences
 
 object SharedPre {
     var sharedPre : SharedPreferences? = null
-    fun setText(text:String)
+    fun setText(text:String?)
     {
         sharedPre?.edit()?.putString("token",text)?.apply()
     }

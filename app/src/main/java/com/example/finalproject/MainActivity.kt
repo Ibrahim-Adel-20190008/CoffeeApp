@@ -2,6 +2,7 @@ package com.example.finalproject
 
 import android.content.Intent
 import android.os.Bundle
+import android.text.TextUtils
 import android.util.Log
 import android.widget.Button
 import android.widget.EditText
@@ -74,7 +75,7 @@ class MainActivity : AppCompatActivity(){
 
     fun checkToken()
     {
-        if(SharedPre.getText()!="")
+        if(!TextUtils.isEmpty(SharedPre.getText()))
         {
             val intent = Intent(this, ProductListActivity::class.java)
             intent.flags = (Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK)

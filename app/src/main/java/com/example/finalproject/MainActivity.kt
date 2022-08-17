@@ -46,18 +46,11 @@ class MainActivity : AppCompatActivity() {
                         if (response.isSuccessful) {
                             if (response.code() == 200) {
                                 SharedPre.setText(response.body()?.token.toString())
-                                SharedPre.setUser(
-                                    User(
-                                        null,
-                                        null,
-                                        response.body()?.email.toString()
-                                    )
-                                )
+                                SharedPre.setEmail(response.body()?.email)
                                 Log.v(
                                     "Logged successfully",
                                     "onResponse ${response.body().toString()}"
                                 )
-                                getUserData()
                                 checkToken()
                             }
 
@@ -92,24 +85,5 @@ class MainActivity : AppCompatActivity() {
             intent.flags = (Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK)
             startActivity(intent)
         }
-    }
-
-    fun getUserData() {
-        service.getUser("Bearer ${SharedPre.getText()}", SharedPre.getUser()?.email)
-            .enqueue(object : Callback<User> {
-                override fun onResponse(call: Call<User>, response: Response<User>) {
-                    if (response.isSuccessful) {
-                        val email = response.body()?.email
-                        val fullName = response.body()?.username
-                        val password = response.body()?.password
-                        SharedPre.setUser(User(fullName, password, email))
-                    } else {
-                        Log.v("401 ", "onResponse ${response.body()}")
-                    }
-                }
-                override fun onFailure(call: Call<User>, t: Throwable) {
-                    Log.d("###", "Nothing")
-                }
-            })
     }
 }

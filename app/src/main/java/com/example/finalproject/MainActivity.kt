@@ -16,44 +16,58 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class MainActivity : AppCompatActivity(){
-    lateinit var Email : EditText
-    lateinit var Password : EditText
-    lateinit var Login : Button
-    lateinit var Register : TextView
+class MainActivity : AppCompatActivity() {
+    lateinit var Email: EditText
+    lateinit var Password: EditText
+    lateinit var Login: Button
+    lateinit var Register: TextView
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        SharedPre.sharedPre = applicationContext.getSharedPreferences("myPref",MODE_PRIVATE)
+        SharedPre.sharedPre = applicationContext.getSharedPreferences("myPref", MODE_PRIVATE)
 
         Login = findViewById(R.id.btn_login)
         Register = findViewById(R.id.register)
         Email = findViewById(R.id.et_email)
         Password = findViewById(R.id.et_password)
 
-        Login.setOnClickListener{
+        Login.setOnClickListener {
 
             // start user profile activity
 
-            if(Email.text.toString()!="" && Password.text.toString()!="")
-            {
-                val newUser = User (null,Password.text.toString(),Email.text.toString())
-                service.login(newUser)?.enqueue(object : Callback<LoginResponse>{
+            if (Email.text.toString() != "" && Password.text.toString() != "") {
+                val newUser = User(null, Password.text.toString(), Email.text.toString())
+                service.login(newUser)?.enqueue(object : Callback<LoginResponse> {
 
-                    override fun onResponse(call: Call<LoginResponse>, response: Response<LoginResponse>) {
-                        if(response.isSuccessful)
-                        {
-                            if(response.code()==200){
+                    override fun onResponse(
+                        call: Call<LoginResponse>,
+                        response: Response<LoginResponse>
+                    ) {
+                        if (response.isSuccessful) {
+                            if (response.code() == 200) {
                                 SharedPre.setText(response.body()?.token.toString())
-                                Log.v("Logged successfully", "onResponse ${response.body().toString()}")
+                                SharedPre.setUser(
+                                    User(
+                                        null,
+                                        null,
+                                        response.body()?.email.toString()
+                                    )
+                                )
+                                Log.v(
+                                    "Logged successfully",
+                                    "onResponse ${response.body().toString()}"
+                                )
+                                getUserData()
                                 checkToken()
                             }
 
-                        }
-                        else if(response.code()==401) {
-                            Toast.makeText(applicationContext,"Wrong Email or Password",Toast.LENGTH_SHORT).show()
-                        }
-                        else{
+                        } else if (response.code() == 401) {
+                            Toast.makeText(
+                                applicationContext,
+                                "Wrong Email or Password",
+                                Toast.LENGTH_SHORT
+                            ).show()
+                        } else {
                             Log.v("not 401 or 200", "onResponse ${response.code()}")
                         }
                     }
@@ -62,24 +76,40 @@ class MainActivity : AppCompatActivity(){
                         Log.d("###", "Nothing")
                     }
                 })
-            }
-            else{
-                Toast.makeText(this,"Please Fill All Required Fields",Toast.LENGTH_SHORT).show()
+            } else {
+                Toast.makeText(this, "Please Fill All Required Fields", Toast.LENGTH_SHORT).show()
             }
         }
-        Register.setOnClickListener{
-            startActivity(Intent(this,RegisterActivity::class.java))
+        Register.setOnClickListener {
+            startActivity(Intent(this, RegisterActivity::class.java))
         }
         checkToken()
     }
 
-    fun checkToken()
-    {
-        if(!TextUtils.isEmpty(SharedPre.getText()))
-        {
+    fun checkToken() {
+        if (!TextUtils.isEmpty(SharedPre.getText())) {
             val intent = Intent(this, ProductListActivity::class.java)
             intent.flags = (Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK)
             startActivity(intent)
         }
+    }
+
+    fun getUserData() {
+        service.getUser("Bearer ${SharedPre.getText()}", SharedPre.getUser()?.email)
+            .enqueue(object : Callback<User> {
+                override fun onResponse(call: Call<User>, response: Response<User>) {
+                    if (response.isSuccessful) {
+                        val email = response.body()?.email
+                        val fullName = response.body()?.username
+                        val password = response.body()?.password
+                        SharedPre.setUser(User(fullName, password, email))
+                    } else {
+                        Log.v("401 ", "onResponse ${response.body()}")
+                    }
+                }
+                override fun onFailure(call: Call<User>, t: Throwable) {
+                    Log.d("###", "Nothing")
+                }
+            })
     }
 }

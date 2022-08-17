@@ -1,7 +1,9 @@
 package com.example.finalproject.sharedpref
 
-import android.app.Application
 import android.content.SharedPreferences
+import com.example.finalproject.loginClasses.User
+import com.google.gson.Gson
+
 
 object SharedPre {
     var sharedPre : SharedPreferences? = null
@@ -13,5 +15,14 @@ object SharedPre {
     {
         return sharedPre?.getString("token",null)
     }
-
+    fun setUser(newUser:User){
+        val gson = Gson()
+        val json = gson.toJson(newUser)
+        sharedPre?.edit()?.putString("User",json)?.apply()
+    }
+    fun getUser(): User? {
+        val gson = Gson()
+        val json: String? = sharedPre?.getString("User", "")
+        return gson.fromJson(json, User::class.java)
+    }
 }

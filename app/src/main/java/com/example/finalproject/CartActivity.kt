@@ -4,6 +4,7 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.MenuItem
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
@@ -12,6 +13,8 @@ import com.google.android.material.bottomnavigation.BottomNavigationView
 
 class CartActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItemSelectedListener {
     var cartAdapter:CartAdapter? = null
+    private lateinit var arrowBack: ImageView
+    lateinit var toolBarText:TextView
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_cart)
@@ -25,9 +28,19 @@ class CartActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItemS
 
 
         val rvCart: RecyclerView = findViewById(R.id.rv_cart)
-
         rvCart.layoutManager = layoutManager
         rvCart.adapter = cartAdapter
+
+        supportActionBar?.hide()
+        arrowBack = findViewById(R.id.arrow_back)
+        toolBarText = findViewById(R.id.toolbar_text)
+        val profileText ="My Cart"
+        toolBarText.text = profileText
+
+        // click back
+        arrowBack.setOnClickListener {
+            finish()
+        }
     }
 
     fun calculateCartTotal(): Double{

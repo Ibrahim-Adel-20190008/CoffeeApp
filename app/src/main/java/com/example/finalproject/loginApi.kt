@@ -9,10 +9,8 @@ import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Call
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
-import retrofit2.http.Body
-import retrofit2.http.GET
-import retrofit2.http.Header
-import retrofit2.http.POST
+import retrofit2.http.*
+
 // https://reqres.in/api/login
 interface loginApi {
     @POST("/api/authentication/login")
@@ -24,6 +22,10 @@ interface loginApi {
 
     @GET("/api/products/all")
     fun getAllProducts(@Header("Authorization") accessToken: String) : Call<ArrayList<CoffeeItem>>
+
+    @GET("/api/user/byEmail")
+    fun getUser(@Header("Authorization") accessToken: String, @Query("email") email:String?) : Call<User>
+
 }
 val  client =  OkHttpClient.Builder()
     .addInterceptor( HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY))

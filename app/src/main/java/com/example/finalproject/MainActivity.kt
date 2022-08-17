@@ -45,7 +45,9 @@ class MainActivity : AppCompatActivity(){
                         {
                             if(response.code()==200){
                                 SharedPre.setText(response.body()?.token.toString())
+                                SharedPre.setUser(User(null,null,response.body()?.email.toString()))
                                 Log.v("Logged successfully", "onResponse ${response.body().toString()}")
+                                getUserData()
                                 checkToken()
                             }
 
@@ -70,6 +72,7 @@ class MainActivity : AppCompatActivity(){
         Register.setOnClickListener{
             startActivity(Intent(this,RegisterActivity::class.java))
         }
+        getUserData()
         checkToken()
     }
 
@@ -81,5 +84,30 @@ class MainActivity : AppCompatActivity(){
             intent.flags = (Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK)
             startActivity(intent)
         }
+    }
+    fun getUserData()
+    {
+        service.getUser("Bearer ${SharedPre.getText()}",SharedPre.getUser()?.email)?.enqueue(object : Callback<User>{
+            override fun onResponse(call: Call<User>, response: Response<User>) {
+                if(response.isSuccessful)
+                {
+                    val email = response.body()?.email
+                    val fullName = response.body()?.username
+                    val password = response.body()?.password
+                    SharedPre.setUser(User(email,password,fullName))
+                    // Log.v("Logged successfully", "onResponse ${response.body().toString()}")
+                }
+                else if(response.code()==401) {
+                    Toast.makeText(applicationContext,"Wrong Email or Password",Toast.LENGTH_SHORT).show()
+                }
+                else{
+                    Log.v("not 401 or 200", "onResponse ${response.code()}")
+                }
+            }
+
+            override fun onFailure(call: Call<User>, t: Throwable) {
+                Log.d("###", "Nothing")
+            }
+        })
     }
 }

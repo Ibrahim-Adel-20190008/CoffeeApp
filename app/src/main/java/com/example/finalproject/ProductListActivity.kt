@@ -38,8 +38,9 @@ class ProductListActivity : AppCompatActivity(), BottomNavigationView.OnNavigati
         bottomNavigationView.selectedItemId = R.id.ic_home
         bottomNavigationView.setOnNavigationItemSelectedListener(this)
         //testApi()
-
+        supportActionBar?.hide()
     }
+
     fun getCoffeeList(){
         service.getAllProducts("Bearer ${SharedPre.getText()}").enqueue(this)
     }

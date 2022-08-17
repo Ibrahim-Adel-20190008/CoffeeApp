@@ -1,13 +1,11 @@
 package com.example.finalproject
 
-import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
-import com.example.finalproject.dataclasses.RegisterResponse
 import com.example.finalproject.loginClasses.User
 import retrofit2.Call
 import retrofit2.Callback

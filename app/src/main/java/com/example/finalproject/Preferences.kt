@@ -3,10 +3,7 @@ package com.example.finalproject
 import android.annotation.SuppressLint
 import android.os.Bundle
 import android.util.Log
-import android.widget.Button
-import android.widget.ImageView
-import android.widget.TextView
-import android.widget.Toast
+import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
 import com.bumptech.glide.Glide
 import com.example.finalproject.dataclasses.CoffeeItem
@@ -16,6 +13,7 @@ import com.example.finalproject.sharedpref.SharedList
 
 class Preferences : AppCompatActivity() {
     private lateinit var img: ImageView
+    private lateinit var arrowBack: ImageView
     private lateinit var sImg: ImageView
     private lateinit var mImg: ImageView
     private lateinit var lImg: ImageView
@@ -54,6 +52,7 @@ class Preferences : AppCompatActivity() {
         tvNum = findViewById(R.id.number)
         totalPrice = findViewById(R.id.total)
         addToCart = findViewById(R.id.add_to_cart)
+        arrowBack = findViewById(R.id.arrow_back)
 
 
         val coffeeObject = intent.getParcelableExtra<CoffeeItem>("Selected_Item")
@@ -65,6 +64,9 @@ class Preferences : AppCompatActivity() {
         tvPrice.text = priceSmall.toString()
         totalPrice.text = priceSmall.toString()
         Glide.with(this).load(coffeeObject?.urlToImg).into(img)
+
+        // to hide app toolabar
+        supportActionBar?.hide()
 
         // increment and decrement button
         tvInc.setOnClickListener {
@@ -80,6 +82,11 @@ class Preferences : AppCompatActivity() {
                 tvPrice.text = (tvPrice.text.toString().toDouble() -priceSmall).toString()
                 calculateTotal()
             }
+        }
+
+        // click back
+        arrowBack.setOnClickListener {
+            finish()
         }
 
         // size small, medium, large

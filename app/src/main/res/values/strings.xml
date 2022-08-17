@@ -29,4 +29,6 @@
     <string name="demo_price">100EGP</string>
     <string name="add_to_card">Add to cart</string>
     <string name="log_out">Log Out</string>
+    <string name="sign_up">Sign Up</string>
+    <string name="order">Select Order</string>
 </resources>

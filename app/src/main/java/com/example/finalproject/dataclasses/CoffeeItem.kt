@@ -7,12 +7,16 @@ import com.google.gson.annotations.SerializedName
 data class CoffeeItem(@SerializedName("image"  ) var urlToImg  : String? = null,
                       @SerializedName("name"       ) var name   : String? = null,
                       @SerializedName("price"       ) var price   : Double? = null,
-                      @SerializedName("next"       ) var next   : String = ">"): Parcelable {
+                      @SerializedName("description"       ) var description   : String? = null,
+                      @SerializedName("id"       ) var id   : Long? = null,
+                      var next   : String = ">"): Parcelable {
     constructor(parcel: Parcel) : this(
         parcel.readString(),
         parcel.readString(),
         parcel.readValue(Double::class.java.classLoader) as? Double,
         parcel.readString().toString()
+    //TODO " check if description and id attribute added should it has a parcel?"
+
     ) {
     }
 

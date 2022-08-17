@@ -19,6 +19,7 @@ class UserProfileActivity : AppCompatActivity(), BottomNavigationView.OnNavigati
     lateinit var userEmail:TextView
     private lateinit var arrowBack: ImageView
     lateinit var userName:TextView
+    lateinit var hiMsg:TextView
     lateinit var toolBarText:TextView
     lateinit var logOut: Button
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -29,12 +30,14 @@ class UserProfileActivity : AppCompatActivity(), BottomNavigationView.OnNavigati
         userEmail = findViewById(R.id.user_email)
         userName = findViewById(R.id.username)
         logOut = findViewById(R.id.logout)
+        hiMsg = findViewById(R.id.hi)
         arrowBack = findViewById(R.id.arrow_back)
         toolBarText = findViewById(R.id.toolbar_text)
 
         val currentUser =SharedPre.getUser()
         userEmail.text = currentUser?.email
         userName.text = currentUser?.username
+        hiMsg.text = "Hi ${currentUser?.username}"
 
         val bottomNavigationView = findViewById<BottomNavigationView>(R.id.bottom_nav)
         bottomNavigationView.selectedItemId = R.id.ic_profile

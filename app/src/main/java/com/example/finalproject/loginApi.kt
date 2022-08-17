@@ -23,8 +23,9 @@ interface loginApi {
     @GET("/api/products/all")
     fun getAllProducts(@Header("Authorization") accessToken: String) : Call<ArrayList<CoffeeItem>>
 
-    @GET("/api/user/byEmail")
-    fun getUser(@Header("Authorization") accessToken: String, @Query("email") email:String?) : Call<User>
+    @GET("/api/user/byEmail/{email}")
+    fun getUser(@Header("Authorization") accessToken: String,
+                @Path("email") email:String?) : Call<User>
 
 }
 val  client =  OkHttpClient.Builder()

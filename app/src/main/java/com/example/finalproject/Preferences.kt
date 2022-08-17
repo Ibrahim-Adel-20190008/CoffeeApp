@@ -15,24 +15,24 @@ import com.example.finalproject.sharedpref.SharedList
 
 
 class Preferences : AppCompatActivity() {
-    lateinit var img: ImageView
-    lateinit var sImg: ImageView
-    lateinit var mImg: ImageView
-    lateinit var lImg: ImageView
-    lateinit var noSugar: ImageView
-    lateinit var sugar: ImageView
-    lateinit var milk: ImageView
-    lateinit var chocolate: ImageView
-    lateinit var tvTitle: TextView
-    lateinit var tvPrice: TextView
-    lateinit var tvInc: TextView
-    lateinit var tvDec: TextView
-    lateinit var tvNum: TextView
-    lateinit var totalPrice: TextView
-    lateinit var addToCart: Button
-    val priceSmall:Double = 100.0
-    val priceMedium:Double = priceSmall*1.5
-    val priceLarge:Double = priceSmall*2
+    private lateinit var img: ImageView
+    private lateinit var sImg: ImageView
+    private lateinit var mImg: ImageView
+    private lateinit var lImg: ImageView
+    private lateinit var noSugar: ImageView
+    private lateinit var sugar: ImageView
+    private lateinit var milk: ImageView
+    private lateinit var chocolate: ImageView
+    private lateinit var tvTitle: TextView
+    private lateinit var tvPrice: TextView
+    private lateinit var tvInc: TextView
+    private lateinit var tvDec: TextView
+    private lateinit var tvNum: TextView
+    private lateinit var totalPrice: TextView
+    private lateinit var addToCart: Button
+    private var priceSmall = 0.0
+    private var priceMedium:Double = 0.0
+    private var priceLarge:Double =0.0
 
     @SuppressLint("SetTextI18n")
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -57,6 +57,10 @@ class Preferences : AppCompatActivity() {
 
 
         val coffeeObject = intent.getParcelableExtra<CoffeeItem>("Selected_Item")
+        priceSmall = coffeeObject?.price.toString().toDouble()
+        priceMedium = priceSmall*1.5
+        priceLarge = priceSmall*2
+
         tvTitle.text = coffeeObject?.name
         tvPrice.text = priceSmall.toString()
         totalPrice.text = priceSmall.toString()

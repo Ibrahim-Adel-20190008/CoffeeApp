@@ -8,15 +8,13 @@ data class CoffeeItem(@SerializedName("image"  ) var urlToImg  : String? = null,
                       @SerializedName("name"       ) var name   : String? = null,
                       @SerializedName("price"       ) var price   : Double? = null,
                       @SerializedName("description"       ) var description   : String? = null,
-                      @SerializedName("id"       ) var id   : Long? = null,
-                      var next   : String = ">"): Parcelable {
+                      @SerializedName("id"       ) var id   : Long? = null): Parcelable {
     constructor(parcel: Parcel) : this(
         parcel.readString(),
         parcel.readString(),
         parcel.readValue(Double::class.java.classLoader) as? Double,
-        parcel.readString().toString()
-    //TODO " check if description and id attribute added should it has a parcel?"
-
+        parcel.readString(),
+        parcel.readValue(Long::class.java.classLoader) as? Long
     ) {
     }
 
@@ -24,7 +22,8 @@ data class CoffeeItem(@SerializedName("image"  ) var urlToImg  : String? = null,
         parcel.writeString(urlToImg)
         parcel.writeString(name)
         parcel.writeValue(price)
-        parcel.writeString(next)
+        parcel.writeString(description)
+        parcel.writeValue(id)
     }
 
     override fun describeContents(): Int {

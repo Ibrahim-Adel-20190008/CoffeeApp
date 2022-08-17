@@ -36,18 +36,25 @@ class MainActivity : AppCompatActivity(){
 
             if(Email.text.toString()!="" && Password.text.toString()!="")
             {
-                val newUser = User (Email.text.toString(),Password.text.toString())
+                val newUser = User (null,Password.text.toString(),Email.text.toString())
                 service.login(newUser)?.enqueue(object : Callback<LoginResponse>{
 
                     override fun onResponse(call: Call<LoginResponse>, response: Response<LoginResponse>) {
                         if(response.isSuccessful)
                         {
-                            SharedPre.setText(response.body()?.token.toString())
-                            checkToken()
-                        }
-                        else {
-                            Toast.makeText(applicationContext,"Invalid Username or Password",Toast.LENGTH_SHORT).show()
+                            if(response.code()==200){
+                                SharedPre.setText(response.body()?.token.toString())
+                                Log.v("Logged successfully", "onResponse ${response.body().toString()}")
+                                checkToken()
+                            }
 
+                        }
+                        else if(response.code()==401) {
+                            Toast.makeText(applicationContext,"Wrong Email or Password",Toast.LENGTH_SHORT).show()
+
+                        }
+                        else{
+                            Log.v("not 401 or 200", "onResponse ${response.code()}")
                         }
                     }
 

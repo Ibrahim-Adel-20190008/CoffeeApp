@@ -3,6 +3,6 @@ package com.example.finalproject.loginClasses
 import com.google.gson.annotations.SerializedName
 
 data class User(
-    @SerializedName("email") val email:String,
-    @SerializedName("password") val password:String
-)
+    @SerializedName("fullName") val username: String? = null,
+    @SerializedName("password") val password:String,
+    @SerializedName("email") val email:String)

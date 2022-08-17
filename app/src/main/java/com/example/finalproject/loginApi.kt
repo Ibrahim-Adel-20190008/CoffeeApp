@@ -11,15 +11,17 @@ import retrofit2.http.POST
 
 // https://reqres.in/api/login
 interface loginApi {
-    @POST("api/login")
+    @POST("/api/authentication/login")
     fun login(@Body user: User): Call<LoginResponse>
 
-    @POST("api/register")
-    fun register(@Body user: User): Call<RegisterResponse>
+    //register fun
+    @POST("/api/authentication/create")
+    fun register(@Body user: User): Call<Unit>
+
 }
 
 var retrofit: Retrofit = Retrofit.Builder()
-    .baseUrl("https://reqres.in/")
+    .baseUrl("https://coffee-menu123.herokuapp.com")
     .addConverterFactory(GsonConverterFactory.create())
     .build()
 

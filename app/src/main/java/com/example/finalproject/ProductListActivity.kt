@@ -7,6 +7,8 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.MenuItem
+import android.widget.ImageView
+import android.widget.TextView
 import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
@@ -20,12 +22,11 @@ import retrofit2.Response
 
 class ProductListActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItemSelectedListener,ProductListAdapter.onListener,Callback<ArrayList<CoffeeItem>>{
     var productListAdapter:ProductListAdapter? = null
-
+    private lateinit var arrowBack: ImageView
+    lateinit var toolBarText: TextView
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_product_list)
-        //val layoutManager = LinearLayoutManager(this)
-        //val layoutManager = GridLayoutManager(this, 2)
         val layoutManager = StaggeredGridLayoutManager(1, RecyclerView.VERTICAL)
         getCoffeeList()
         productListAdapter = ProductListAdapter(this)
@@ -33,12 +34,22 @@ class ProductListActivity : AppCompatActivity(), BottomNavigationView.OnNavigati
 
         rvCoffees.layoutManager = layoutManager
         rvCoffees.adapter = productListAdapter
+        arrowBack = findViewById(R.id.arrow_back)
+        toolBarText = findViewById(R.id.toolbar_text)
+        val profileText ="Menu"
+        toolBarText.text = profileText
         // getNews() fun that will use Api fun to get coffees list
         val bottomNavigationView = findViewById<BottomNavigationView>(R.id.bottom_nav)
         bottomNavigationView.selectedItemId = R.id.ic_home
         bottomNavigationView.setOnNavigationItemSelectedListener(this)
         //testApi()
         supportActionBar?.hide()
+
+        // click back
+        arrowBack.setOnClickListener {
+            finish()
+        }
+
     }
 
     fun getCoffeeList(){

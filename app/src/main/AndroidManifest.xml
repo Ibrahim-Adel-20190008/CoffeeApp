@@ -21,6 +21,7 @@
         <activity
             android:name=".SplashScreen"
             android:exported="true"
+            android:screenOrientation="portrait"
             android:theme="@style/Theme.splash">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -30,12 +31,15 @@
         </activity>
         <activity
             android:name=".Preferences"
+            android:screenOrientation="portrait"
             android:exported="false" />
         <activity
             android:name=".CartActivity"
+            android:screenOrientation="portrait"
             android:exported="false" />
         <activity
             android:name=".ProductListActivity"
+            android:screenOrientation="portrait"
             android:exported="false" />
         <activity
             android:name=".UserProfileActivity"

@@ -12,21 +12,13 @@ class SplashScreen : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_splash_screen)
 
-        val PREFS_NAME = "MyPrefsFile"
-
-        val settings = getSharedPreferences(PREFS_NAME, 0)
-
-        if (settings.getBoolean("my_first_time", true)) {
-            supportActionBar?.hide()
-            val handler = Handler(Looper.getMainLooper())
-            handler.postDelayed({
-                val intent = Intent(this,MainActivity::class.java)
-                startActivity(intent)
-                finish()
-            },3000)
-            settings.edit().putBoolean("my_first_time", false).apply()
-        }
+        supportActionBar?.hide()
+        val handler = Handler(Looper.getMainLooper())
+        handler.postDelayed({
+            val intent = Intent(this, MainActivity::class.java)
+            startActivity(intent)
+            finish()
+        }, 3000)
 
     }
-
 }

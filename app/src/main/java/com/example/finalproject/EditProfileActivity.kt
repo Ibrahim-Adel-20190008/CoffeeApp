@@ -39,8 +39,7 @@ class EditProfileActivity : AppCompatActivity() {
                     "Bearer ${SharedPre.getText()}",
                     SharedPre.getEmail(),
                     username,
-                    password,
-                    SharedPre.getEmail()).enqueue(object : Callback<Unit> {
+                    password).enqueue(object : Callback<Unit> {
                     override fun onResponse(call: Call<Unit>, response: Response<Unit>) {
                         if (response.isSuccessful) {
                             Toast.makeText(this@EditProfileActivity,"profile is edited successfully", Toast.LENGTH_SHORT).show()

@@ -29,7 +29,7 @@ interface loginApi {
     @GET("api/user/update/{email}")
     fun editProfileInfo(@Header("Authorization") accessToken: String,
                         @Path("email") email:String?,@Query("fullName") fullName: String,
-                        @Query("password") password: String,@Query("email") Email: String?) : Call<Unit>
+                        @Query("password") password: String) : Call<Unit>
 
 }
 val  client =  OkHttpClient.Builder()

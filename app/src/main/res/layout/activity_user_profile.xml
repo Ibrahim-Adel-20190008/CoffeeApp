@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".UserProfileActivity">
+    tools:context=".activities.UserProfileActivity">
     <include
         android:id="@+id/include"
         layout="@layout/toolbar"/>
@@ -45,59 +45,60 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@id/hi" />
-
 <LinearLayout
-    android:id="@+id/first_linear"
+    android:id="@+id/master_layout"
+    android:padding="16dp"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:orientation="vertical"
     app:layout_constraintTop_toBottomOf="@id/image_view"
-    app:layout_constraintLeft_toLeftOf="parent"
-    android:layout_marginTop="50dp"
-    android:paddingStart="16dp"
-    android:orientation="horizontal">
-    <TextView
-        android:id="@+id/email_info"
-        android:layout_width="wrap_content"
+    android:layout_height="wrap_content">
+    <LinearLayout
+        android:id="@+id/first_linear"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/email_info"
-        android:textColor="@color/brown"
-        android:textSize="20sp" />
+        android:layout_marginTop="20dp"
+        android:orientation="horizontal">
+        <TextView
+            android:id="@+id/email_info"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/email_info"
+            android:textColor="@color/brown"
+            android:textSize="20sp" />
 
-    <TextView
-        android:id="@+id/user_email"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textColor="@color/black"
-        android:paddingStart="16dp"
-        android:textSize="18sp"
-        app:layout_constraintHorizontal_bias="0.061"/>
-</LinearLayout>
+        <TextView
+            android:id="@+id/user_email"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/black"
+            android:paddingStart="16dp"
+            android:textSize="18sp"
+            app:layout_constraintHorizontal_bias="0.061"/>
+    </LinearLayout>
 
     <LinearLayout
         android:id="@+id/second_linear"
         android:layout_width="match_parent"
+        android:layout_marginTop="20dp"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/first_linear"
-        app:layout_constraintLeft_toLeftOf="parent"
-        android:layout_marginTop="50dp"
-        android:paddingStart="16dp"
         android:orientation="horizontal">
-    <TextView
-        android:id="@+id/name_info"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/name_info"
-        android:textColor="@color/brown"
-        android:textSize="20sp"/>
+        <TextView
+            android:id="@+id/name_info"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/name_info"
+            android:textColor="@color/brown"
+            android:textSize="20sp"/>
 
-    <TextView
-        android:id="@+id/username"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:paddingStart="16dp"
-        android:textColor="@color/black"
-        android:textSize="18sp"
-        app:layout_constraintHorizontal_bias="0.062"/>
+        <TextView
+            android:id="@+id/username"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingStart="16dp"
+            android:textColor="@color/black"
+            android:textSize="18sp"
+            app:layout_constraintHorizontal_bias="0.062"/>
+    </LinearLayout>
 </LinearLayout>
     <Button
         android:id="@+id/btn_editProfile"
@@ -106,11 +107,11 @@
         android:background="@drawable/roundstyle"
         android:text="@string/edit_profile"
         android:textSize="17sp"
-        app:layout_constraintTop_toBottomOf="@id/second_linear"
+        android:textAllCaps="false"
+        app:layout_constraintTop_toBottomOf="@id/master_layout"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toTopOf="@id/logout"
-
          />
 
 

@@ -1,27 +1,29 @@
-package com.example.finalproject
+package com.example.finalproject.activities
 
 import android.annotation.SuppressLint
-import android.app.Application
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.MenuItem
 import android.widget.ImageView
 import android.widget.TextView
-import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
-import com.example.finalproject.dataclasses.CoffeeItem
-import com.example.finalproject.sharedpref.SharedPre
+import com.example.finalproject.R
+import com.example.finalproject.adapters.ProductListAdapter
+import com.example.finalproject.api.service
+import com.example.finalproject.dataClasses.CoffeeItem
+import com.example.finalproject.localDataBase.SharedPre
 import com.google.android.material.bottomnavigation.BottomNavigationView
-import com.google.android.material.navigation.NavigationView
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class ProductListActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItemSelectedListener,ProductListAdapter.onListener,Callback<ArrayList<CoffeeItem>>{
-    var productListAdapter:ProductListAdapter? = null
+class ProductListActivity : AppCompatActivity(),
+    BottomNavigationView.OnNavigationItemSelectedListener,
+    ProductListAdapter.onListener, Callback<ArrayList<CoffeeItem>> {
+    var productListAdapter: ProductListAdapter? = null
     private lateinit var arrowBack: ImageView
     lateinit var toolBarText: TextView
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -36,7 +38,7 @@ class ProductListActivity : AppCompatActivity(), BottomNavigationView.OnNavigati
         rvCoffees.adapter = productListAdapter
         arrowBack = findViewById(R.id.arrow_back)
         toolBarText = findViewById(R.id.toolbar_text)
-        val profileText ="Menu"
+        val profileText = "Menu"
         toolBarText.text = profileText
         // getNews() fun that will use Api fun to get coffees list
         val bottomNavigationView = findViewById<BottomNavigationView>(R.id.bottom_nav)
@@ -52,58 +54,26 @@ class ProductListActivity : AppCompatActivity(), BottomNavigationView.OnNavigati
 
     }
 
-    fun getCoffeeList(){
+    fun getCoffeeList() {
         service.getAllProducts("Bearer ${SharedPre.getText()}").enqueue(this)
     }
 
-    /*fun testApi(){
-        service.getAllProducts("Bearer ${SharedPre.getText()}")
-            .enqueue(object : Callback<ArrayList<CoffeeItem>> {
-            override fun onResponse(call: Call<ArrayList<CoffeeItem>>, response: Response<ArrayList<CoffeeItem>>) {
-                if (response.isSuccessful) {
-                    if(response.code()==200){
-                        Log.v("3", "onResponse Success ${response.body().toString()}")
-
-                    }
-
-
-                }else {
-                    Log.v("4", "onResponse not success ${response.code()}")
-                    Log.v("4", "onResponse not success ${response.body().toString()}")
-                }
-                Log.v("6", " Token value ${SharedPre.getText()}")
-            }
-
-            override fun onFailure(call: Call<ArrayList<CoffeeItem>>, t: Throwable) {
-                Log.v("5", "onFailure ${t.localizedMessage} ")
-            }
-        })
-    }
-
-    fun generateCoffeeArray(): Array<CoffeeItem> {
-        // Note: function will be removed and replaced with array from API Request
-        // we will call the api function here using the service instead of creating array
-        return Array(10) {
-           CoffeeItem("https://picsum.photos/100/100","Coffee",null,"product Description")
-        }
-    }*/
-
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
-        when(item.itemId){
-            R.id.ic_cart ->{
-                startActivity(Intent(this,CartActivity::class.java))
-                overridePendingTransition(0,0)
+        when (item.itemId) {
+            R.id.ic_cart -> {
+                startActivity(Intent(this, CartActivity::class.java))
+                overridePendingTransition(0, 0)
                 return true
             }
-            R.id.ic_profile ->{
-                startActivity(Intent(this,UserProfileActivity::class.java))
-                overridePendingTransition(0,0)
+            R.id.ic_profile -> {
+                startActivity(Intent(this, UserProfileActivity::class.java))
+                overridePendingTransition(0, 0)
                 return true
             }
-            R.id.ic_home ->{
+            R.id.ic_home -> {
                 return true
             }
-            else ->{
+            else -> {
                 return false
             }
         }
@@ -111,8 +81,8 @@ class ProductListActivity : AppCompatActivity(), BottomNavigationView.OnNavigati
 
     override fun onClick(position: Int) {
         val coffeeItem = productListAdapter?.Coffees?.get(position)
-        val intent = Intent(this,Preferences::class.java)
-        intent.putExtra("Selected_Item",coffeeItem)
+        val intent = Intent(this, PreferencesActivity::class.java)
+        intent.putExtra("Selected_Item", coffeeItem)
         startActivity(intent)
     }
 
@@ -122,7 +92,8 @@ class ProductListActivity : AppCompatActivity(), BottomNavigationView.OnNavigati
         response: Response<ArrayList<CoffeeItem>>
     ) {
         productListAdapter?.Coffees = response.body()!!
-        productListAdapter?.notifyDataSetChanged()    }
+        productListAdapter?.notifyDataSetChanged()
+    }
 
     override fun onFailure(call: Call<ArrayList<CoffeeItem>>, t: Throwable) {
         Log.v("5", "onFailure ${t.localizedMessage} ")

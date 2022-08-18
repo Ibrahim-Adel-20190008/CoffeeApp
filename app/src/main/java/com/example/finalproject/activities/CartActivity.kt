@@ -1,20 +1,24 @@
-package com.example.finalproject
+package com.example.finalproject.activities
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.MenuItem
+import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
-import com.example.finalproject.sharedpref.SharedList
+import com.example.finalproject.R
+import com.example.finalproject.adapters.CartAdapter
+import com.example.finalproject.localDataBase.SharedList
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
 class CartActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItemSelectedListener {
-    var cartAdapter:CartAdapter? = null
+    var cartAdapter: CartAdapter? = null
     private lateinit var arrowBack: ImageView
-    lateinit var toolBarText:TextView
+    lateinit var toolBarText: TextView
+    lateinit var image: ImageView
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_cart)
@@ -34,8 +38,10 @@ class CartActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItemS
         supportActionBar?.hide()
         arrowBack = findViewById(R.id.arrow_back)
         toolBarText = findViewById(R.id.toolbar_text)
-        val profileText ="My Cart"
-        toolBarText.text = profileText
+        image = findViewById(R.id.cart_image)
+        image.visibility = View.VISIBLE
+        val cartText = "My Cart"
+        toolBarText.text = cartText
 
         // click back
         arrowBack.setOnClickListener {
@@ -43,30 +49,30 @@ class CartActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItemS
         }
     }
 
-    fun calculateCartTotal(): Double{
+    fun calculateCartTotal(): Double {
         var totalCount = 0.0
-        for (item in SharedList.getAllItems()!!){
-            totalCount+= item.totalPrice!!
+        for (item in SharedList.getAllItems()!!) {
+            totalCount += item.totalPrice!!
         }
         return totalCount
     }
 
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
-        when(item.itemId){
-            R.id.ic_cart ->{
+        when (item.itemId) {
+            R.id.ic_cart -> {
                 return true
             }
-            R.id.ic_profile ->{
-                startActivity(Intent(this,UserProfileActivity::class.java))
-                overridePendingTransition(0,0)
+            R.id.ic_profile -> {
+                startActivity(Intent(this, UserProfileActivity::class.java))
+                overridePendingTransition(0, 0)
                 return true
             }
-            R.id.ic_home ->{
-                startActivity(Intent(this,ProductListActivity::class.java))
-                overridePendingTransition(0,0)
+            R.id.ic_home -> {
+                startActivity(Intent(this, ProductListActivity::class.java))
+                overridePendingTransition(0, 0)
                 return true
             }
-            else ->{
+            else -> {
                 return false
             }
         }

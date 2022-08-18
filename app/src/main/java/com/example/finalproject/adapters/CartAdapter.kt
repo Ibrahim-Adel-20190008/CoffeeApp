@@ -1,4 +1,4 @@
-package com.example.finalproject
+package com.example.finalproject.adapters
 
 import android.view.LayoutInflater
 import android.view.View
@@ -7,17 +7,20 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.example.finalproject.sharedpref.Item
+import com.example.finalproject.R
+import com.example.finalproject.localDataBase.Item
 
-class CartAdapter(var cartItems: ArrayList<Item>?): RecyclerView.Adapter<CartAdapter.ViewHolder>() {
+class CartAdapter(var cartItems: ArrayList<Item>?) :
+    RecyclerView.Adapter<CartAdapter.ViewHolder>() {
 
-    inner class ViewHolder(itemView: View):RecyclerView.ViewHolder(itemView){
+    inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         var cartImage: ImageView
         var cartTitle: TextView
-        var tvQuantity : TextView
+        var tvQuantity: TextView
         var tvQuantityNum: TextView
-        var tvPrice : TextView
-        var tvEgp : TextView
+        var tvPrice: TextView
+        var tvEgp: TextView
+
         init {
             cartImage = itemView.findViewById(R.id.cart_Image)
             cartTitle = itemView.findViewById(R.id.cart_title)
@@ -29,7 +32,7 @@ class CartAdapter(var cartItems: ArrayList<Item>?): RecyclerView.Adapter<CartAda
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val v = LayoutInflater.from(parent.context).inflate(R.layout.item_cart,parent,false)
+        val v = LayoutInflater.from(parent.context).inflate(R.layout.item_cart, parent, false)
         return ViewHolder(v)
     }
 
@@ -43,5 +46,5 @@ class CartAdapter(var cartItems: ArrayList<Item>?): RecyclerView.Adapter<CartAda
             .into(holder.cartImage)
     }
 
-    override fun getItemCount(): Int = cartItems?.size?: 0
+    override fun getItemCount(): Int = cartItems?.size ?: 0
 }

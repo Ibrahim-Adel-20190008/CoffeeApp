@@ -1,12 +1,14 @@
-package com.example.finalproject
+package com.example.finalproject.activities
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
-import com.example.finalproject.loginClasses.User
+import androidx.appcompat.app.AppCompatActivity
+import com.example.finalproject.R
+import com.example.finalproject.api.service
+import com.example.finalproject.dataClasses.User
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -22,10 +24,10 @@ class RegisterActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_register)
 
-         etEmail = findViewById<EditText>(R.id.et_regEmail)
-         etUsername = findViewById<EditText>(R.id.et_regUsername)
-         etPassword = findViewById<EditText>(R.id.et_regPassword)
-         etRepeatedPass = findViewById<EditText>(R.id.et_repeatPass)
+        etEmail = findViewById<EditText>(R.id.et_regEmail)
+        etUsername = findViewById<EditText>(R.id.et_regUsername)
+        etPassword = findViewById<EditText>(R.id.et_regPassword)
+        etRepeatedPass = findViewById<EditText>(R.id.et_repeatPass)
         btnRegister = findViewById(R.id.btn_signup)
 
         Log.v("1", "before button register")
@@ -35,24 +37,36 @@ class RegisterActivity : AppCompatActivity() {
             val password = etPassword?.text.toString()
             val username = etUsername?.text.toString()
             val repeatedPass = etRepeatedPass?.text.toString()
-            if(email.isEmpty() || password.isEmpty() || username.isEmpty() || repeatedPass.isEmpty()){
-                Toast.makeText(this,"please fill all required fields", Toast.LENGTH_SHORT).show()
-            }else if(password != repeatedPass){
-                Toast.makeText(this,"password field is not equal to repeated password field", Toast.LENGTH_SHORT).show()
-            }else{
+            if (email.isEmpty() || password.isEmpty() || username.isEmpty() || repeatedPass.isEmpty()) {
+                Toast.makeText(this, "please fill all required fields", Toast.LENGTH_SHORT).show()
+            } else if (password != repeatedPass) {
+                Toast.makeText(
+                    this,
+                    "password field is not equal to repeated password field",
+                    Toast.LENGTH_SHORT
+                ).show()
+            } else {
                 val user = User(username, password, email)
                 service.register(user)
                     .enqueue(object : Callback<Unit> {
                         override fun onResponse(call: Call<Unit>, response: Response<Unit>) {
                             if (response.isSuccessful) {
-                                if(response.code()==200){
-                                    Toast.makeText(this@RegisterActivity,"User Registered Successfulyy", Toast.LENGTH_LONG).show()
+                                if (response.code() == 200) {
+                                    Toast.makeText(
+                                        this@RegisterActivity,
+                                        "User Registered Successfulyy",
+                                        Toast.LENGTH_LONG
+                                    ).show()
                                     finish()
                                 }
                                 Log.v("3", "onResponse ${response.body().toString()}")
 
-                            } else if(response.code()==400) {
-                                Toast.makeText(this@RegisterActivity,"Email is already in use", Toast.LENGTH_LONG).show()
+                            } else if (response.code() == 400) {
+                                Toast.makeText(
+                                    this@RegisterActivity,
+                                    "Email is already in use",
+                                    Toast.LENGTH_LONG
+                                ).show()
 
                             } else {
                                 Log.v("4", "onResponse ${response.code()}")

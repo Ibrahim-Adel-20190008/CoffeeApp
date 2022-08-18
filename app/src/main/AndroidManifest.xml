@@ -16,10 +16,10 @@
         android:theme="@style/Theme.FinalProject"
         tools:targetApi="31">
         <activity
-            android:name=".EditProfileActivity"
+            android:name=".activities.EditProfileActivity"
             android:exported="false" />
         <activity
-            android:name=".SplashScreen"
+            android:name=".activities.SplashActivity"
             android:exported="true"
             android:screenOrientation="portrait"
             android:theme="@style/Theme.splash">
@@ -30,27 +30,27 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".Preferences"
+            android:name=".activities.PreferencesActivity"
             android:screenOrientation="portrait"
             android:exported="false" />
         <activity
-            android:name=".CartActivity"
+            android:name=".activities.CartActivity"
             android:screenOrientation="portrait"
             android:exported="false" />
         <activity
-            android:name=".ProductListActivity"
+            android:name=".activities.ProductListActivity"
             android:screenOrientation="portrait"
             android:exported="false" />
         <activity
-            android:name=".UserProfileActivity"
+            android:name=".activities.UserProfileActivity"
             android:exported="false"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".RegisterActivity"
+            android:name=".activities.RegisterActivity"
             android:exported="false"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".MainActivity"
+            android:name=".activities.LoginActivity"
             android:exported="false"
             android:screenOrientation="portrait" />
     </application>

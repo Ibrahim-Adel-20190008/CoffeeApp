@@ -1,17 +1,21 @@
-package com.example.finalproject
+package com.example.finalproject.activities
 
 import android.annotation.SuppressLint
 import android.os.Bundle
 import android.util.Log
-import android.widget.*
+import android.widget.Button
+import android.widget.ImageView
+import android.widget.TextView
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.bumptech.glide.Glide
-import com.example.finalproject.dataclasses.CoffeeItem
-import com.example.finalproject.sharedpref.Item
-import com.example.finalproject.sharedpref.SharedList
+import com.example.finalproject.R
+import com.example.finalproject.dataClasses.CoffeeItem
+import com.example.finalproject.localDataBase.Item
+import com.example.finalproject.localDataBase.SharedList
 
 
-class Preferences : AppCompatActivity() {
+class PreferencesActivity : AppCompatActivity() {
     private lateinit var img: ImageView
     private lateinit var arrowBack: ImageView
     private lateinit var sImg: ImageView
@@ -29,8 +33,8 @@ class Preferences : AppCompatActivity() {
     private lateinit var totalPrice: TextView
     private lateinit var addToCart: Button
     private var priceSmall = 0.0
-    private var priceMedium:Double = 0.0
-    private var priceLarge:Double =0.0
+    private var priceMedium: Double = 0.0
+    private var priceLarge: Double = 0.0
 
     @SuppressLint("SetTextI18n")
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -57,8 +61,8 @@ class Preferences : AppCompatActivity() {
 
         val coffeeObject = intent.getParcelableExtra<CoffeeItem>("Selected_Item")
         priceSmall = coffeeObject?.price.toString().toDouble()
-        priceMedium = priceSmall*1.5
-        priceLarge = priceSmall*2
+        priceMedium = priceSmall * 1.5
+        priceLarge = priceSmall * 2
 
         tvTitle.text = coffeeObject?.name
         tvPrice.text = priceSmall.toString()
@@ -71,7 +75,7 @@ class Preferences : AppCompatActivity() {
         // increment and decrement button
         tvInc.setOnClickListener {
             tvNum.text = (tvNum.text.toString().toInt() + 1).toString()
-            tvPrice.text = (tvPrice.text.toString().toDouble() +priceSmall).toString()
+            tvPrice.text = (tvPrice.text.toString().toDouble() + priceSmall).toString()
             calculateTotal()
         }
         tvDec.setOnClickListener {
@@ -79,7 +83,7 @@ class Preferences : AppCompatActivity() {
                 Toast.makeText(this, "You can't order less than 1 item", Toast.LENGTH_SHORT).show()
             } else {
                 tvNum.text = (tvNum.text.toString().toInt() - 1).toString()
-                tvPrice.text = (tvPrice.text.toString().toDouble() -priceSmall).toString()
+                tvPrice.text = (tvPrice.text.toString().toDouble() - priceSmall).toString()
                 calculateTotal()
             }
         }
@@ -91,36 +95,36 @@ class Preferences : AppCompatActivity() {
 
         // size small, medium, large
         lImg.setOnClickListener {
-                lImg.setBackgroundResource(R.drawable.select_item)
-                lImg.setTag(R.drawable.select_item)
-                sImg.setBackgroundResource(R.drawable.non_select_item)
-                sImg.setTag(R.drawable.non_select_item)
-                mImg.setTag(R.drawable.non_select_item)
-                mImg.setBackgroundResource(R.drawable.non_select_item)
-                calculateTotal()
+            lImg.setBackgroundResource(R.drawable.select_item)
+            lImg.tag = R.drawable.select_item
+            sImg.setBackgroundResource(R.drawable.non_select_item)
+            sImg.tag = R.drawable.non_select_item
+            mImg.tag = R.drawable.non_select_item
+            mImg.setBackgroundResource(R.drawable.non_select_item)
+            calculateTotal()
         }
 
-        sImg.setOnClickListener{
+        sImg.setOnClickListener {
             sImg.setBackgroundResource(R.drawable.select_item)
-            sImg.setTag(R.drawable.select_item)
+            sImg.tag = R.drawable.select_item
             lImg.setBackgroundResource(R.drawable.non_select_item)
-            lImg.setTag(R.drawable.non_select_item)
-            mImg.setTag(R.drawable.non_select_item)
+            lImg.tag = R.drawable.non_select_item
+            mImg.tag = R.drawable.non_select_item
             mImg.setBackgroundResource(R.drawable.non_select_item)
             calculateTotal()
         }
         mImg.setOnClickListener {
-                mImg.setBackgroundResource(R.drawable.select_item)
-                mImg.setTag(R.drawable.select_item)
-                lImg.setBackgroundResource(R.drawable.non_select_item)
-                sImg.setTag(R.drawable.non_select_item)
-                lImg.setTag(R.drawable.non_select_item)
-                sImg.setBackgroundResource(R.drawable.non_select_item)
-                calculateTotal()
+            mImg.setBackgroundResource(R.drawable.select_item)
+            mImg.tag = R.drawable.select_item
+            lImg.setBackgroundResource(R.drawable.non_select_item)
+            sImg.tag = R.drawable.non_select_item
+            lImg.tag = R.drawable.non_select_item
+            sImg.setBackgroundResource(R.drawable.non_select_item)
+            calculateTotal()
         }
 
         // with sugar or without sugar
-        sugar.setOnClickListener{
+        sugar.setOnClickListener {
             noSugar.setBackgroundResource(R.drawable.non_select_item)
             sugar.setBackgroundResource(R.drawable.select_item)
         }
@@ -131,36 +135,37 @@ class Preferences : AppCompatActivity() {
 
         // additions (milk, chocolate)
         milk.setOnClickListener {
-            if(milk.getTag() != null && milk.getTag().equals(R.drawable.select_item)) {
+            if (milk.tag != null && milk.tag.equals(R.drawable.select_item)) {
                 milk.setBackgroundResource(R.drawable.non_select_item)
-                milk.setTag(R.drawable.non_select_item)
-            }
-            else{
+                milk.tag = R.drawable.non_select_item
+            } else {
                 milk.setBackgroundResource(R.drawable.select_item)
-                milk.setTag(R.drawable.select_item)
+                milk.tag = R.drawable.select_item
             }
             calculateTotal()
         }
         chocolate.setOnClickListener {
-            if(chocolate.getTag() != null && chocolate.getTag().equals(R.drawable.select_item)) {
+            if (chocolate.tag != null && chocolate.tag.equals(R.drawable.select_item)) {
                 chocolate.setBackgroundResource(R.drawable.non_select_item)
-                chocolate.setTag(R.drawable.non_select_item)
-            }
-            else{
+                chocolate.tag = R.drawable.non_select_item
+            } else {
                 chocolate.setBackgroundResource(R.drawable.select_item)
-                chocolate.setTag(R.drawable.select_item)
+                chocolate.tag = R.drawable.select_item
             }
             calculateTotal()
         }
 
         addToCart.setOnClickListener {
-            val item = Item(coffeeObject?.urlToImg,
+            val item = Item(
+                coffeeObject?.urlToImg,
                 coffeeObject?.name,
                 totalPrice.text.toString().toDouble(),
-                tvNum.text.toString().toInt())
+                tvNum.text.toString().toInt()
+            )
             SharedList.add(item)
-            Log.d("@@@",SharedList.getAllItems().toString())
-            Toast.makeText(this,"Successfully Order Check Cart To See It",Toast.LENGTH_SHORT).show()
+            Log.d("@@@", SharedList.getAllItems().toString())
+            Toast.makeText(this, "Successfully Order Check Cart To See It", Toast.LENGTH_SHORT)
+                .show()
             finish()
         }
         // to select default data and calculate total at start
@@ -170,34 +175,28 @@ class Preferences : AppCompatActivity() {
 
     }
 
-    fun defaultSelect()
-    {
+    fun defaultSelect() {
         sImg.setBackgroundResource(R.drawable.select_item)
         noSugar.setBackgroundResource(R.drawable.select_item)
     }
 
-    fun calculateTotal()
-    {
+    fun calculateTotal() {
         val number = tvNum.text.toString().toInt()
         var additions = 50
         var totalPriceValue = 0.0
-        if(milk.getTag() != null && milk.getTag().equals(R.drawable.select_item)){
-            totalPriceValue += (number *additions)
+        if (milk.tag != null && milk.tag.equals(R.drawable.select_item)) {
+            totalPriceValue += (number * additions)
         }
-        if(chocolate.getTag() != null && chocolate.getTag().equals(R.drawable.select_item)){
-            totalPriceValue += (number *additions)
+        if (chocolate.tag != null && chocolate.tag.equals(R.drawable.select_item)) {
+            totalPriceValue += (number * additions)
         }
 
-        if(mImg.getTag() != null && mImg.getTag().equals(R.drawable.select_item)) {
+        if (mImg.tag != null && mImg.tag.equals(R.drawable.select_item)) {
             totalPriceValue += (number * priceMedium)
-        }
-
-        else if(lImg.getTag() != null && lImg.getTag().equals(R.drawable.select_item)){
-            totalPriceValue +=  (number * priceLarge)
-        }
-        else
-        {
-            totalPriceValue +=  (number * priceSmall)
+        } else if (lImg.tag != null && lImg.tag.equals(R.drawable.select_item)) {
+            totalPriceValue += (number * priceLarge)
+        } else {
+            totalPriceValue += (number * priceSmall)
         }
         totalPrice.text = totalPriceValue.toString()
     }

@@ -11,7 +11,7 @@ import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.example.finalproject.R
 import com.example.finalproject.adapters.CartAdapter
-import com.example.finalproject.localDataBase.SharedList
+import com.example.finalproject.localDataBase.SharedPre
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
 class CartActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItemSelectedListener {
@@ -28,7 +28,7 @@ class CartActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItemS
         val layoutManager = StaggeredGridLayoutManager(1, RecyclerView.VERTICAL)
         var cartTotalPrice = findViewById<TextView>(R.id.tv_totalPrice)
         cartTotalPrice.text = calculateCartTotal().toString()
-        cartAdapter = CartAdapter(SharedList.getAllItems())
+        cartAdapter = CartAdapter(SharedPre.getUserCart()?.getAllItems())
 
 
         val rvCart: RecyclerView = findViewById(R.id.rv_cart)
@@ -51,7 +51,7 @@ class CartActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItemS
 
     fun calculateCartTotal(): Double {
         var totalCount = 0.0
-        for (item in SharedList.getAllItems()!!) {
+        for (item in SharedPre.getUserCart()?.getAllItems()!!) {
             totalCount += item.totalPrice!!
         }
         return totalCount

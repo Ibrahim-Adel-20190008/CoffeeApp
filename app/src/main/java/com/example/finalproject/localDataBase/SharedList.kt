@@ -7,7 +7,7 @@ data class Item(
     var quantity: Int? = null
 )
 
-object SharedList {
+class SharedList {
     var items: ArrayList<Item>? = ArrayList()
     fun add(item: Item) {
         items?.add(item)

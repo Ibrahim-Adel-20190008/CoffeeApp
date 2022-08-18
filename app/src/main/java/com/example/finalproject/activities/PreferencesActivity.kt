@@ -13,6 +13,7 @@ import com.example.finalproject.R
 import com.example.finalproject.dataClasses.CoffeeItem
 import com.example.finalproject.localDataBase.Item
 import com.example.finalproject.localDataBase.SharedList
+import com.example.finalproject.localDataBase.SharedPre
 
 
 class PreferencesActivity : AppCompatActivity() {
@@ -35,6 +36,7 @@ class PreferencesActivity : AppCompatActivity() {
     private var priceSmall = 0.0
     private var priceMedium: Double = 0.0
     private var priceLarge: Double = 0.0
+    private var sharedList: SharedList = SharedList()
 
     @SuppressLint("SetTextI18n")
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -162,8 +164,9 @@ class PreferencesActivity : AppCompatActivity() {
                 totalPrice.text.toString().toDouble(),
                 tvNum.text.toString().toInt()
             )
-            SharedList.add(item)
-            Log.d("@@@", SharedList.getAllItems().toString())
+            sharedList.add(item)
+            SharedPre.setUserCart(sharedList)
+            Log.d("@@@", sharedList.getAllItems().toString())
             Toast.makeText(this, "Successfully Order Check Cart To See It", Toast.LENGTH_SHORT)
                 .show()
             finish()

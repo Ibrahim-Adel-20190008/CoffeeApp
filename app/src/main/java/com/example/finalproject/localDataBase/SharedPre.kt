@@ -1,6 +1,7 @@
 package com.example.finalproject.localDataBase
 
 import android.content.SharedPreferences
+import com.google.gson.Gson
 
 
 object SharedPre {
@@ -19,5 +20,15 @@ object SharedPre {
 
     fun getEmail(): String? {
         return sharedPre?.getString("Email", null)
+    }
+    fun setUserCart(newUser:SharedList){
+        val gson = Gson()
+        val json = gson.toJson(newUser)
+        sharedPre?.edit()?.putString(getEmail(),json)?.apply()
+    }
+    fun getUserCart(): SharedList? {
+        val gson = Gson()
+        val json: String? = sharedPre?.getString(getEmail(),gson.toJson(SharedList()))
+        return gson.fromJson(json, SharedList::class.java)
     }
 }

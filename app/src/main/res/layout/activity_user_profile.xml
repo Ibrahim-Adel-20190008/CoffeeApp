@@ -99,6 +99,20 @@
         android:textSize="18sp"
         app:layout_constraintHorizontal_bias="0.062"/>
 </LinearLayout>
+    <Button
+        android:id="@+id/btn_editProfile"
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        android:background="@drawable/roundstyle"
+        android:text="@string/edit_profile"
+        android:textSize="17sp"
+        app:layout_constraintTop_toBottomOf="@id/second_linear"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/logout"
+
+         />
+
 
     <Button
         android:id="@+id/logout"
@@ -108,8 +122,9 @@
         android:text="@string/log_out"
         android:textAllCaps="false"
         android:textSize="17sp"
-        app:layout_constraintTop_toBottomOf="@id/second_linear"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
+
+        app:layout_constraintTop_toBottomOf="@id/btn_editProfile"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toTopOf="@id/bottom_nav" />
 </androidx.constraintlayout.widget.ConstraintLayout>

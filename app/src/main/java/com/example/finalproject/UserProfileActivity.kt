@@ -27,6 +27,7 @@ class UserProfileActivity : AppCompatActivity(), BottomNavigationView.OnNavigati
     lateinit var hiMsg:TextView
     lateinit var toolBarText:TextView
     lateinit var logOut: Button
+    lateinit var editProfile: Button
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_user_profile)
@@ -38,6 +39,7 @@ class UserProfileActivity : AppCompatActivity(), BottomNavigationView.OnNavigati
         hiMsg = findViewById(R.id.hi)
         arrowBack = findViewById(R.id.arrow_back)
         toolBarText = findViewById(R.id.toolbar_text)
+        editProfile = findViewById(R.id.btn_editProfile)
 
         val bottomNavigationView = findViewById<BottomNavigationView>(R.id.bottom_nav)
         bottomNavigationView.selectedItemId = R.id.ic_profile
@@ -47,6 +49,10 @@ class UserProfileActivity : AppCompatActivity(), BottomNavigationView.OnNavigati
 
         val urlToImg = "https://th.bing.com/th/id/R.fe20a57e77099fe1baea254d50f6802c?rik=FsyFE8G2RLe1EA&riu=http%3a%2f%2fehonami.blob.core.windows.net%2fmedia%2f2014%2f11%2fcoffee-even-decaf-found-benefit-liver-health.jpg&ehk=XtVvJ0uvsrpSLM02RVuUPBj0EQvfbEYoC7lew1%2bWrmk%3d&risl=&pid=ImgRaw&r=0"
         Glide.with(this).load(urlToImg).into(image)
+
+        editProfile.setOnClickListener {
+            startActivity(Intent(this,EditProfileActivity::class.java))
+        }
 
 
 

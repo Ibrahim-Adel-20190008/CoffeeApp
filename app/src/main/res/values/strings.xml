@@ -31,4 +31,9 @@
     <string name="log_out">Log Out</string>
     <string name="sign_up">Sign Up</string>
     <string name="order">Select Order</string>
+    <string name="edit_profile">Edit Profile</string>
+    <string name="confirm">CONFIRM</string>
+    <string name="save">SAVE</string>
+    <string name="new_password">New Password</string>
+    <string name="confirm_new_password">Confirm New Password</string>
 </resources>

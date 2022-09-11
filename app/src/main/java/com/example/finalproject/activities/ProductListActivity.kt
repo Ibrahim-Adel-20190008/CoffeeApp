@@ -5,6 +5,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.MenuItem
+import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
@@ -46,11 +47,7 @@ class ProductListActivity : AppCompatActivity(),
         bottomNavigationView.setOnNavigationItemSelectedListener(this)
         //testApi()
         supportActionBar?.hide()
-
-        // click back
-        arrowBack.setOnClickListener {
-            finish()
-        }
+        arrowBack.setVisibility(View.INVISIBLE)
 
     }
 

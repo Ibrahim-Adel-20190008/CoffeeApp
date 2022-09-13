@@ -15,9 +15,11 @@ import com.example.finalproject.activities.LoginActivity
 import com.example.finalproject.activities.UserActivity
 import com.example.finalproject.api.service
 import com.example.finalproject.dataClasses.User
+import com.example.finalproject.databinding.ActivityCoffeeBinding
 import com.example.finalproject.databinding.FragmentRegisterBinding
 import com.example.finalproject.databinding.FragmentUserProfileBinding
 import com.example.finalproject.localDataBase.SharedPre
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -39,6 +41,7 @@ class UserProfileFragment : Fragment() {
         super.onActivityCreated(savedInstanceState)
         val profileText = "My Profile"
         binding.root.findViewById<TextView>(R.id.toolbar_text).text = profileText
+        activity?.findViewById<BottomNavigationView>(R.id.bottom_nav)?.setVisibility(View.VISIBLE)
 
         val urlToImg =
             "https://th.bing.com/th/id/R.fe20a57e77099fe1baea254d50f6802c?rik=FsyFE8G2RLe1EA&riu=http%3a%2f%2fehonami.blob.core.windows.net%2fmedia%2f2014%2f11%2fcoffee-even-decaf-found-benefit-liver-health.jpg&ehk=XtVvJ0uvsrpSLM02RVuUPBj0EQvfbEYoC7lew1%2bWrmk%3d&risl=&pid=ImgRaw&r=0"
@@ -63,9 +66,9 @@ class UserProfileFragment : Fragment() {
         }
 
         // click back
-        binding.root.findViewById<ImageView>(R.id.arrow_back).setOnClickListener {
-            activity?.onBackPressed()
-        }
+//        binding.root.findViewById<ImageView>(R.id.arrow_back).setOnClickListener {
+//            activity?.onBackPressed()
+//        }
         getUserData()
 
     }

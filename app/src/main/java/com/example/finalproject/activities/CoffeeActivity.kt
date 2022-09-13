@@ -34,7 +34,7 @@ class CoffeeActivity : AppCompatActivity() {
     private fun setFragment(fragment:Fragment){
         supportFragmentManager.beginTransaction().apply {
             replace(R.id.fragment_container2, fragment)
-            addToBackStack(null)
+           // addToBackStack(null)
             commit()
         }
     }

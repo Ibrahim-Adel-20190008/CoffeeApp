@@ -17,6 +17,7 @@ import com.example.finalproject.dataClasses.User
 import com.example.finalproject.databinding.FragmentCartBinding
 import com.example.finalproject.databinding.FragmentEditProfileBinding
 import com.example.finalproject.localDataBase.SharedPre
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -38,7 +39,9 @@ class EditProfileFragment : Fragment() {
         val editProfileText = "Edit My Profile"
         binding.root.findViewById<TextView>(R.id.toolbar_text).text = editProfileText
 
+        activity?.findViewById<BottomNavigationView>(R.id.bottom_nav)?.setVisibility(View.GONE)
         // click back
+        binding.include.arrowBack.setVisibility(View.VISIBLE)
         binding.root.findViewById<ImageView>(R.id.arrow_back).setOnClickListener {
             activity?.onBackPressed()
         }

@@ -50,8 +50,8 @@ class CartFragment : Fragment() {
         binding.root.findViewById<TextView>(R.id.toolbar_text).text = cartText
 
         // click back
-        binding.root.findViewById<ImageView>(R.id.arrow_back).setOnClickListener {
-            activity?.onBackPressed()        }
+//        binding.root.findViewById<ImageView>(R.id.arrow_back).setOnClickListener {
+//            activity?.onBackPressed()        }
 
     }
 

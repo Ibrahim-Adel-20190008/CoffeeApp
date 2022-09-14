@@ -14,7 +14,7 @@ import com.example.finalproject.adapters.CartAdapter
 import com.example.finalproject.localDataBase.SharedPre
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
-class CartActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItemSelectedListener {
+class CartActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItemSelectedListener{
     var cartAdapter: CartAdapter? = null
     private lateinit var arrowBack: ImageView
     lateinit var toolBarText: TextView
@@ -28,7 +28,7 @@ class CartActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItemS
         val layoutManager = StaggeredGridLayoutManager(1, RecyclerView.VERTICAL)
         var cartTotalPrice = findViewById<TextView>(R.id.tv_totalPrice)
         cartTotalPrice.text = calculateCartTotal().toString()
-        cartAdapter = CartAdapter(SharedPre.getUserCart()?.getAllItems())
+        cartAdapter = CartAdapter()
 
 
         val rvCart: RecyclerView = findViewById(R.id.rv_cart)

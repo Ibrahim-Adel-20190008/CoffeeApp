@@ -13,6 +13,13 @@ class SharedList {
         items?.add(item)
     }
 
+    fun removeAt(index:Int){
+        items?.removeAt(index)
+    }
+    fun clear(){
+        items?.clear()
+    }
+
     fun getAllItems(): ArrayList<Item>? {
         return items
     }

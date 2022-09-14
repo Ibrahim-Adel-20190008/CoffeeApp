@@ -10,16 +10,27 @@ import com.bumptech.glide.Glide
 import com.example.finalproject.R
 import com.example.finalproject.localDataBase.Item
 
-class CartAdapter(var cartItems: ArrayList<Item>?) :
+class CartAdapter() :
     RecyclerView.Adapter<CartAdapter.ViewHolder>() {
+    var cartItems: ArrayList<Item>? = ArrayList()
+    private lateinit var mListener: OnItemClickListener
 
-    inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+    interface OnItemClickListener{
+        fun onDeleteCLick(position: Int)
+    }
+
+    fun setOnItemClickListener(listener: OnItemClickListener){
+        mListener = listener
+    }
+
+    inner class ViewHolder(itemView: View,listener: OnItemClickListener) : RecyclerView.ViewHolder(itemView){
         var cartImage: ImageView
         var cartTitle: TextView
         var tvQuantity: TextView
         var tvQuantityNum: TextView
         var tvPrice: TextView
         var tvEgp: TextView
+        var deleteItem:ImageView
 
         init {
             cartImage = itemView.findViewById(R.id.cart_Image)
@@ -28,12 +39,28 @@ class CartAdapter(var cartItems: ArrayList<Item>?) :
             tvQuantityNum = itemView.findViewById(R.id.tv_quantityNum)
             tvPrice = itemView.findViewById(R.id.item_cart_price)
             tvEgp = itemView.findViewById(R.id.tv_egp)
+            deleteItem = itemView.findViewById((R.id.image_delete))
+
+            deleteItem.setOnClickListener(object : View.OnClickListener {
+                override fun onClick(view: View?) {
+                    if(listener !=null){
+                        val position = adapterPosition
+                        if(position != RecyclerView.NO_POSITION){
+                            listener.onDeleteCLick(position)
+                        }
+                    }
+                }
+
+            })
+
         }
+
+
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val v = LayoutInflater.from(parent.context).inflate(R.layout.item_cart, parent, false)
-        return ViewHolder(v)
+        return ViewHolder(v,mListener)
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
@@ -47,4 +74,5 @@ class CartAdapter(var cartItems: ArrayList<Item>?) :
     }
 
     override fun getItemCount(): Int = cartItems?.size ?: 0
+
 }

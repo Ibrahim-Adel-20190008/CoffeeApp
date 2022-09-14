@@ -36,7 +36,7 @@ class CartFragment : Fragment() {
         val layoutManager = StaggeredGridLayoutManager(1, RecyclerView.VERTICAL)
         val cartTotalPrice = binding.tvTotalPrice
         cartTotalPrice.text = calculateCartTotal().toString()
-        cartAdapter = CartAdapter(SharedPre.getUserCart()?.getAllItems())
+        cartAdapter = CartAdapter(SharedPre.getUserCart().getAllItems())
 
 
         val rvCart: RecyclerView = binding.rvCart
@@ -48,10 +48,6 @@ class CartFragment : Fragment() {
         binding.root.findViewById<ImageView>(R.id.cart_image).visibility = View.VISIBLE
         val cartText = "My Cart"
         binding.root.findViewById<TextView>(R.id.toolbar_text).text = cartText
-
-        // click back
-//        binding.root.findViewById<ImageView>(R.id.arrow_back).setOnClickListener {
-//            activity?.onBackPressed()        }
 
     }
 

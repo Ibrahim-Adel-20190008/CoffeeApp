@@ -26,7 +26,7 @@ object SharedPre {
         val json = gson.toJson(newUser)
         sharedPre?.edit()?.putString(getEmail(),json)?.apply()
     }
-    fun getUserCart(): SharedList? {
+    fun getUserCart(): SharedList {
         val gson = Gson()
         val json: String? = sharedPre?.getString(getEmail(),gson.toJson(SharedList()))
         return gson.fromJson(json, SharedList::class.java)

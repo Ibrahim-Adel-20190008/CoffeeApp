@@ -109,11 +109,11 @@ class LoginFragment : Fragment() {
            val intent = Intent(activity, CoffeeActivity::class.java)
            intent.flags = (Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK)
             startActivity(intent)
-            parentFragmentManager.beginTransaction().apply {
-                replace(R.id.fragment_container,ProductListFragment())
-                addToBackStack(null)
-                commit()
-            }
+//            parentFragmentManager.beginTransaction().apply {
+//                replace(R.id.fragment_container,ProductListFragment())
+//                addToBackStack(null)
+//                commit()
+//            }
         }
     }
 }

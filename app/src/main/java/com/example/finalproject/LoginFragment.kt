@@ -10,6 +10,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.lifecycleScope
 import com.example.finalproject.activities.CoffeeActivity
 import com.example.finalproject.activities.ProductListActivity
 import com.example.finalproject.activities.RegisterActivity
@@ -19,6 +20,9 @@ import com.example.finalproject.dataClasses.User
 import com.example.finalproject.databinding.FragmentLoginBinding
 import com.example.finalproject.databinding.FragmentRegisterBinding
 import com.example.finalproject.localDataBase.SharedPre
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -50,7 +54,29 @@ class LoginFragment : Fragment() {
 
             if (binding.etEmail.text.toString() != "" && binding.etPassword.text.toString() != "") {
                 val newUser = User(null, binding.etPassword.text.toString(), binding.etEmail.text.toString())
-                service.login(newUser)?.enqueue(object : Callback<LoginResponse> {
+                lifecycleScope.launch(Dispatchers.IO){
+                    val response = service.login(newUser)
+                    if(response.code()==200){
+                        SharedPre.setText(response.body()?.token.toString())
+                        SharedPre.setEmail(response.body()?.email)
+                        Log.v(
+                            "Logged successfully",
+                            "onResponse ${response.body().toString()}"
+                        )
+                        checkToken()
+                    }else if (response.code() == 401) {
+                        launch(Dispatchers.Main){
+                            Toast.makeText(
+                                activity,
+                                "Wrong Email or Password",
+                                Toast.LENGTH_SHORT
+                            ).show()
+                        }
+                    }else {
+                        Log.v("not 401 or 200", "onResponse ${response.code()}")
+                    }
+                }
+                /*service.login(newUser)?.enqueue(object : Callback<LoginResponse> {
 
                     override fun onResponse(
                         call: Call<LoginResponse>,
@@ -81,7 +107,7 @@ class LoginFragment : Fragment() {
                     override fun onFailure(call: Call<LoginResponse>, t: Throwable) {
                         Log.d("###", "Nothing")
                     }
-                })
+                })*/
             } else {
                 Toast.makeText(activity, "Please Fill All Required Fields", Toast.LENGTH_SHORT).show()
             }

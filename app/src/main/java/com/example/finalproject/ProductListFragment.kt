@@ -19,11 +19,14 @@ import com.example.finalproject.databinding.FragmentCartBinding
 import com.example.finalproject.databinding.FragmentProductListBinding
 import com.example.finalproject.localDataBase.SharedPre
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class ProductListFragment : Fragment(),ProductListAdapter.onListener, Callback<ArrayList<CoffeeItem>> {
+class ProductListFragment : Fragment(),ProductListAdapter.onListener{
     var productListAdapter: ProductListAdapter? = null
     private lateinit var communicator : Communicator
     private var _binding: FragmentProductListBinding? = null
@@ -53,7 +56,18 @@ class ProductListFragment : Fragment(),ProductListAdapter.onListener, Callback<A
 
     }
     fun getCoffeeList() {
-        service.getAllProducts("Bearer ${SharedPre.getText()}").enqueue(this)
+       // service.getAllProducts("Bearer ${SharedPre.getText()}").enqueue(this)
+        GlobalScope.launch(Dispatchers.IO){
+            val response = service.getAllProducts("Bearer ${SharedPre.getText()}")
+            if (response.isSuccessful){
+                Log.v("ProductList","testing it ")
+                launch(Dispatchers.Main){
+                    productListAdapter?.Coffees = response.body()!!
+                    productListAdapter?.notifyDataSetChanged()
+                }
+
+            }
+        }
     }
 
     //TODO hanle on cilck listner
@@ -62,17 +76,18 @@ class ProductListFragment : Fragment(),ProductListAdapter.onListener, Callback<A
         communicator.passData(coffeeItem)
     }
 
-    @SuppressLint("NotifyDataSetChanged")
+    /*@SuppressLint("NotifyDataSetChanged")
     override fun onResponse(
         call: Call<ArrayList<CoffeeItem>>,
         response: Response<ArrayList<CoffeeItem>>
     ) {
+        Log.v("ProductList","testing it ")
         productListAdapter?.Coffees = response.body()!!
         productListAdapter?.notifyDataSetChanged()
     }
 
     override fun onFailure(call: Call<ArrayList<CoffeeItem>>, t: Throwable) {
         Log.v("5", "onFailure ${t.localizedMessage} ")
-    }
+    }*/
 
 }

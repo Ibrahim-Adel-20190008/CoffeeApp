@@ -33,7 +33,7 @@ class LoginActivity : AppCompatActivity() {
         Email = findViewById(R.id.et_email)
         Password = findViewById(R.id.et_password)
 
-        Login.setOnClickListener {
+        /*Login.setOnClickListener {
 
             // start user profile activity
 
@@ -74,7 +74,7 @@ class LoginActivity : AppCompatActivity() {
             } else {
                 Toast.makeText(this, "Please Fill All Required Fields", Toast.LENGTH_SHORT).show()
             }
-        }
+        }*/
         Register.setOnClickListener {
             startActivity(Intent(this, RegisterActivity::class.java))
         }

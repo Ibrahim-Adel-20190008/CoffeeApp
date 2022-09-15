@@ -47,7 +47,7 @@ class RegisterActivity : AppCompatActivity() {
                 ).show()
             } else {
                 val user = User(username, password, email)
-                service.register(user)
+                /*service.register(user)
                     .enqueue(object : Callback<Unit> {
                         override fun onResponse(call: Call<Unit>, response: Response<Unit>) {
                             if (response.isSuccessful) {
@@ -76,7 +76,7 @@ class RegisterActivity : AppCompatActivity() {
                         override fun onFailure(call: Call<Unit>, t: Throwable) {
                             Log.v("5", "onFailure ${t.localizedMessage} ")
                         }
-                    })
+                    })*/
 
             }
         }

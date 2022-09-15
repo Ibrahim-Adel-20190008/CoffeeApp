@@ -93,7 +93,7 @@ class UserProfileActivity : AppCompatActivity(),
         }
     }
 
-    fun getUserData() {
+    fun getUserData() { /*
         service.getUser("Bearer ${SharedPre.getText()}", SharedPre.getEmail())
             .enqueue(object : Callback<User> {
                 override fun onResponse(call: Call<User>, response: Response<User>) {
@@ -110,7 +110,7 @@ class UserProfileActivity : AppCompatActivity(),
                 override fun onFailure(call: Call<User>, t: Throwable) {
                     Log.d("###", "Nothing")
                 }
-            })
+            })*/
     }
 
     fun displayData(currentUser: User) {

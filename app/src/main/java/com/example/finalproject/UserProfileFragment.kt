@@ -9,6 +9,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.lifecycle.lifecycleScope
 import com.bumptech.glide.Glide
 import com.example.finalproject.activities.EditProfileActivity
 import com.example.finalproject.activities.LoginActivity
@@ -20,6 +21,9 @@ import com.example.finalproject.databinding.FragmentRegisterBinding
 import com.example.finalproject.databinding.FragmentUserProfileBinding
 import com.example.finalproject.localDataBase.SharedPre
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -86,7 +90,21 @@ class UserProfileFragment : Fragment() {
     }*/
 
     fun getUserData() {
-        service.getUser("Bearer ${SharedPre.getText()}", SharedPre.getEmail())
+
+        lifecycleScope.launch(Dispatchers.IO){
+            val response = service.getUser("Bearer ${SharedPre.getText()}", SharedPre.getEmail())
+            if(response.isSuccessful){
+                val email = response.body()?.email
+                val fullName = response.body()?.username
+                val password = response.body()?.password
+                withContext(Dispatchers.Main){
+                    displayData(User(fullName, password, email))
+                }
+            }else{
+                Log.v("401 ", "onResponse ${response.body()}")
+            }
+        }
+        /*service.getUser("Bearer ${SharedPre.getText()}", SharedPre.getEmail())
             .enqueue(object : Callback<User> {
                 override fun onResponse(call: Call<User>, response: Response<User>) {
                     if (response.isSuccessful) {
@@ -102,7 +120,7 @@ class UserProfileFragment : Fragment() {
                 override fun onFailure(call: Call<User>, t: Throwable) {
                     Log.d("###", "Nothing")
                 }
-            })
+            })*/
     }
 
     fun displayData(currentUser: User) {

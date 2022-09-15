@@ -6,6 +6,7 @@ import com.example.finalproject.dataClasses.User
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Call
+import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.http.*
@@ -13,27 +14,27 @@ import retrofit2.http.*
 // https://reqres.in/api/login
 interface loginApi {
     @POST("/api/authentication/login")
-    fun login(@Body user: User): Call<LoginResponse>
+    suspend fun login(@Body user: User): Response<LoginResponse>
 
     //register fun
     @POST("/api/authentication/create")
-    fun register(@Body user: User): Call<Unit>
+    suspend fun register(@Body user: User): Response<Unit>
 
     @GET("/api/products/all")
-    fun getAllProducts(@Header("Authorization") accessToken: String): Call<ArrayList<CoffeeItem>>
+   suspend fun getAllProducts(@Header("Authorization") accessToken: String): Response<ArrayList<CoffeeItem>>
 
     @GET("/api/user/byEmail/{email}")
-    fun getUser(
+    suspend fun getUser(
         @Header("Authorization") accessToken: String,
         @Path("email") email: String?
-    ): Call<User>
+    ): Response<User>
 
     @GET("api/user/update/{email}")
-    fun editProfileInfo(
+    suspend fun editProfileInfo(
         @Header("Authorization") accessToken: String,
         @Path("email") email: String?, @Query("fullName") fullName: String,
         @Query("password") password: String
-    ): Call<Unit>
+    ): Response<Unit>
 
 }
 

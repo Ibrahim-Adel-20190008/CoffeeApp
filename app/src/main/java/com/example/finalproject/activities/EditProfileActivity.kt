@@ -51,7 +51,7 @@ class EditProfileActivity : AppCompatActivity() {
                     Toast.LENGTH_SHORT
                 ).show()
             } else {
-                service.editProfileInfo(
+               /* service.editProfileInfo(
                     "Bearer ${SharedPre.getText()}",
                     SharedPre.getEmail(),
                     username,
@@ -78,14 +78,14 @@ class EditProfileActivity : AppCompatActivity() {
                     override fun onFailure(call: Call<Unit>, t: Throwable) {
                         Log.d("###", "Nothing")
                     }
-                })
+                })*/
             }
 
         }
         getUserData()
     }
 
-    fun getUserData() {
+    fun getUserData() { /*
         service.getUser("Bearer ${SharedPre.getText()}", SharedPre.getEmail())
             .enqueue(object : Callback<User> {
                 override fun onResponse(call: Call<User>, response: Response<User>) {
@@ -102,7 +102,7 @@ class EditProfileActivity : AppCompatActivity() {
                 override fun onFailure(call: Call<User>, t: Throwable) {
                     Log.d("###", "Nothing")
                 }
-            })
+            })*/
     }
 
     fun displayData(currentUser: User) {

@@ -7,9 +7,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.lifecycle.lifecycleScope
 import com.example.finalproject.api.service
 import com.example.finalproject.dataClasses.User
 import com.example.finalproject.databinding.FragmentRegisterBinding
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -45,7 +48,34 @@ class RegisterFragment : Fragment() {
                 ).show()
             } else {
                 val user = User(username, password, email)
-                service.register(user)
+                lifecycleScope.launch(Dispatchers.IO){
+                    val response = service.register(user)
+                    if(response.code()==200){
+                        launch(Dispatchers.Main){
+                            Toast.makeText(
+                                activity,
+                                "User Registered Successfully",
+                                Toast.LENGTH_LONG
+                            ).show()
+                        }
+                        parentFragmentManager.beginTransaction().apply {
+                            replace(R.id.fragment_container,LoginFragment())
+                            addToBackStack(null)
+                            commit()
+                        }
+                    } else if (response.code()==400){
+                        launch(Dispatchers.Main){
+                            Toast.makeText(
+                                activity,
+                                "Email is already in use",
+                                Toast.LENGTH_LONG
+                            ).show()
+                        }
+                    } else{
+                        Log.v("4", "onResponse ${response.code()}")
+                    }
+                }
+               /* service.register(user)
                     .enqueue(object : Callback<Unit> {
                         override fun onResponse(call: Call<Unit>, response: Response<Unit>) {
                             if (response.isSuccessful) {
@@ -78,7 +108,7 @@ class RegisterFragment : Fragment() {
                         override fun onFailure(call: Call<Unit>, t: Throwable) {
                             Log.v("5", "onFailure ${t.localizedMessage} ")
                         }
-                    })
+                    })*/
 
             }
         }

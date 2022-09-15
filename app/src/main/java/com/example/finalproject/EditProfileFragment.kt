@@ -10,6 +10,7 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
+import androidx.lifecycle.lifecycleScope
 import com.example.finalproject.activities.UserProfileActivity
 import com.example.finalproject.adapters.CartAdapter
 import com.example.finalproject.api.service
@@ -18,6 +19,9 @@ import com.example.finalproject.databinding.FragmentCartBinding
 import com.example.finalproject.databinding.FragmentEditProfileBinding
 import com.example.finalproject.localDataBase.SharedPre
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -59,7 +63,31 @@ class EditProfileFragment : Fragment() {
                     Toast.LENGTH_SHORT
                 ).show()
             } else {
-                service.editProfileInfo(
+
+                lifecycleScope.launch(Dispatchers.IO){
+                    val response = service.editProfileInfo("Bearer ${SharedPre.getText()}",
+                        SharedPre.getEmail(),
+                        username,
+                        password)
+
+                    if (response.isSuccessful){
+                        launch(Dispatchers.Main){
+                            Toast.makeText(
+                                activity,
+                                "profile is edited successfully",
+                                Toast.LENGTH_SHORT
+                            ).show()
+                        }
+                        parentFragmentManager.beginTransaction().apply {
+                            replace(R.id.fragment_container2,UserProfileFragment())
+                            addToBackStack(null)
+                            commit()
+                        }
+                    }else{
+                        Log.v("401 ", "onResponse ${response.body()}")
+                    }
+                }
+               /* service.editProfileInfo(
                     "Bearer ${SharedPre.getText()}",
                     SharedPre.getEmail(),
                     username,
@@ -85,7 +113,7 @@ class EditProfileFragment : Fragment() {
                     override fun onFailure(call: Call<Unit>, t: Throwable) {
                         Log.d("###", "Nothing")
                     }
-                })
+                })*/
             }
 
         }
@@ -93,7 +121,21 @@ class EditProfileFragment : Fragment() {
 
     }
     fun getUserData() {
-        service.getUser("Bearer ${SharedPre.getText()}", SharedPre.getEmail())
+
+        lifecycleScope.launch(Dispatchers.IO){
+            val response = service.getUser("Bearer ${SharedPre.getText()}", SharedPre.getEmail())
+            if(response.isSuccessful){
+                val email = response.body()?.email
+                val fullName = response.body()?.username
+                val password = response.body()?.password
+                withContext(Dispatchers.Main){
+                    displayData(User(fullName, password, email))
+                }
+            }else{
+                Log.v("401 ", "onResponse ${response.body()}")
+            }
+        }
+        /*service.getUser("Bearer ${SharedPre.getText()}", SharedPre.getEmail())
             .enqueue(object : Callback<User> {
                 override fun onResponse(call: Call<User>, response: Response<User>) {
                     if (response.isSuccessful) {
@@ -109,7 +151,7 @@ class EditProfileFragment : Fragment() {
                 override fun onFailure(call: Call<User>, t: Throwable) {
                     Log.d("###", "Nothing")
                 }
-            })
+            })*/
     }
 
     fun displayData(currentUser: User) {

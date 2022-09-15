@@ -52,7 +52,7 @@ class ProductListActivity : AppCompatActivity(),
     }
 
     fun getCoffeeList() {
-        service.getAllProducts("Bearer ${SharedPre.getText()}").enqueue(this)
+        //service.getAllProducts("Bearer ${SharedPre.getText()}").enqueue(this)
     }
 
     override fun onNavigationItemSelected(item: MenuItem): Boolean {

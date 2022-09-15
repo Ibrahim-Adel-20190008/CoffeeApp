@@ -25,6 +25,9 @@ import retrofit2.Callback
 import retrofit2.Response
 
 class UserProfileFragment : Fragment() {
+    lateinit var userEmail: TextView
+    lateinit var userName: TextView
+    lateinit var hiMsg: TextView
 
     private var _binding: FragmentUserProfileBinding? = null
     private val binding get() = _binding!!
@@ -37,8 +40,11 @@ class UserProfileFragment : Fragment() {
         return binding.root
     }
 
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        userEmail =binding.userEmail
+        userName = binding.username
+        hiMsg = binding.hi
         val profileText = "My Profile"
         binding.root.findViewById<TextView>(R.id.toolbar_text).text = profileText
         activity?.findViewById<BottomNavigationView>(R.id.bottom_nav)?.setVisibility(View.VISIBLE)
@@ -73,6 +79,12 @@ class UserProfileFragment : Fragment() {
 
     }
 
+    /*override fun onActivityCreated(savedInstanceState: Bundle?) {
+        super.onActivityCreated(savedInstanceState)
+
+
+    }*/
+
     fun getUserData() {
         service.getUser("Bearer ${SharedPre.getText()}", SharedPre.getEmail())
             .enqueue(object : Callback<User> {
@@ -94,9 +106,13 @@ class UserProfileFragment : Fragment() {
     }
 
     fun displayData(currentUser: User) {
-        binding.userEmail.text = currentUser.email
+        /*binding.userEmail.text = currentUser.email
         binding.username.text = currentUser.username
-        binding.hi.text = "Hi ${currentUser.username}"
+        binding.hi.text = "Hi ${currentUser.username}"*/
+
+        userEmail.text = currentUser.email
+        userName.text = currentUser.username
+        hiMsg.text = "Hi ${currentUser.username}"
     }
 
     override fun onDestroyView() {

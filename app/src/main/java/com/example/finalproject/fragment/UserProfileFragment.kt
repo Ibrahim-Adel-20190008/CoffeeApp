@@ -1,4 +1,4 @@
-package com.example.finalproject
+package com.example.finalproject.fragment
 
 import android.content.Intent
 import android.os.Bundle
@@ -7,26 +7,20 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
 import android.widget.TextView
 import androidx.lifecycle.lifecycleScope
 import com.bumptech.glide.Glide
-import com.example.finalproject.activities.EditProfileActivity
-import com.example.finalproject.activities.LoginActivity
+import com.example.finalproject.R
+import com.example.finalproject.activities.CoffeeActivity
 import com.example.finalproject.activities.UserActivity
 import com.example.finalproject.api.service
 import com.example.finalproject.dataClasses.User
-import com.example.finalproject.databinding.ActivityCoffeeBinding
-import com.example.finalproject.databinding.FragmentRegisterBinding
 import com.example.finalproject.databinding.FragmentUserProfileBinding
 import com.example.finalproject.localDataBase.SharedPre
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
 
 class UserProfileFragment : Fragment() {
     lateinit var userEmail: TextView
@@ -50,17 +44,17 @@ class UserProfileFragment : Fragment() {
         userName = binding.username
         hiMsg = binding.hi
         val profileText = "My Profile"
-        binding.root.findViewById<TextView>(R.id.toolbar_text).text = profileText
+        binding.include.toolbarText.text = profileText
         activity?.findViewById<BottomNavigationView>(R.id.bottom_nav)?.setVisibility(View.VISIBLE)
 
-        val urlToImg =
-            "https://th.bing.com/th/id/R.fe20a57e77099fe1baea254d50f6802c?rik=FsyFE8G2RLe1EA&riu=http%3a%2f%2fehonami.blob.core.windows.net%2fmedia%2f2014%2f11%2fcoffee-even-decaf-found-benefit-liver-health.jpg&ehk=XtVvJ0uvsrpSLM02RVuUPBj0EQvfbEYoC7lew1%2bWrmk%3d&risl=&pid=ImgRaw&r=0"
-        Glide.with(this).load(urlToImg).into(binding.imageView)
+        //TODO  handle api image
+        val urlToImg = SharedPre.getUrl()
+            Glide.with(this).load(urlToImg).into(binding.imageView)
 
         binding.btnEditProfile.setOnClickListener {
             //startActivity(Intent(activity, EditProfileActivity::class.java))
             parentFragmentManager.beginTransaction().apply {
-                replace(R.id.fragment_container2,EditProfileFragment())
+                replace(R.id.fragment_container2, EditProfileFragment())
                 addToBackStack(null)
                 commit()
             }
@@ -74,36 +68,30 @@ class UserProfileFragment : Fragment() {
             intent.flags = (Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK)
             startActivity(intent)
         }
-
-        // click back
-//        binding.root.findViewById<ImageView>(R.id.arrow_back).setOnClickListener {
-//            activity?.onBackPressed()
-//        }
         getUserData()
-
     }
 
-    /*override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
-
-
-    }*/
-
-    fun getUserData() {
-
-        lifecycleScope.launch(Dispatchers.IO){
-            val response = service.getUser("Bearer ${SharedPre.getText()}", SharedPre.getEmail())
-            if(response.isSuccessful){
-                val email = response.body()?.email
-                val fullName = response.body()?.username
-                val password = response.body()?.password
-                withContext(Dispatchers.Main){
-                    displayData(User(fullName, password, email))
-                }
-            }else{
-                Log.v("401 ", "onResponse ${response.body()}")
-            }
+    private fun getUserData() {
+        // to get current user from coffee activity
+        (activity as CoffeeActivity?)?.let{
+            displayData(it.getCurrentUser())
         }
+
+        // move this part into coffee activity to call api only once
+//        lifecycleScope.launch(Dispatchers.IO){
+//            val response = service.getUser("Bearer ${SharedPre.getText()}", SharedPre.getEmail())
+//            if(response.isSuccessful){
+//                val email = response.body()?.email
+//                val fullName = response.body()?.username
+//                val password = response.body()?.password
+//                withContext(Dispatchers.Main){
+//                    displayData(User(fullName, password, email))
+//                }
+//            }else{
+//                Log.v("401 ", "onResponse ${response.body()}")
+//            }
+//        }
+
         /*service.getUser("Bearer ${SharedPre.getText()}", SharedPre.getEmail())
             .enqueue(object : Callback<User> {
                 override fun onResponse(call: Call<User>, response: Response<User>) {
@@ -123,7 +111,7 @@ class UserProfileFragment : Fragment() {
             })*/
     }
 
-    fun displayData(currentUser: User) {
+    private fun displayData(currentUser: User) {
         /*binding.userEmail.text = currentUser.email
         binding.username.text = currentUser.username
         binding.hi.text = "Hi ${currentUser.username}"*/

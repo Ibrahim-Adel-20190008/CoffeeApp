@@ -1,7 +1,7 @@
-package com.example.finalproject
+package com.example.finalproject.fragment
 
-import android.content.Intent
 import android.os.Bundle
+import android.text.TextUtils
 import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -11,20 +11,16 @@ import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
 import androidx.lifecycle.lifecycleScope
-import com.example.finalproject.activities.UserProfileActivity
-import com.example.finalproject.adapters.CartAdapter
+import com.example.finalproject.R
+import com.example.finalproject.activities.CoffeeActivity
 import com.example.finalproject.api.service
 import com.example.finalproject.dataClasses.User
-import com.example.finalproject.databinding.FragmentCartBinding
 import com.example.finalproject.databinding.FragmentEditProfileBinding
 import com.example.finalproject.localDataBase.SharedPre
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
 
 class EditProfileFragment : Fragment() {
     private var _binding: FragmentEditProfileBinding? = null
@@ -51,20 +47,31 @@ class EditProfileFragment : Fragment() {
         }
 
         binding.btnConfirm.setOnClickListener {
-            val password = binding.etNewPassword.text.toString()
+            var password = binding.etNewPassword.text.toString()
             val username = binding.etEditUsername.text.toString()
             val repeatedPass = binding.etRepeatNewPass.text.toString()
-            if (password.isEmpty() || username.isEmpty() || repeatedPass.isEmpty()) {
-                Toast.makeText(activity, "please fill all required fields", Toast.LENGTH_SHORT).show()
-            } else if (password != repeatedPass) {
+            val oldPassword = binding.etOldPassword.text.toString()
+            val currentPassword = SharedPre.getPassword()
+            if(currentPassword != oldPassword){
+                Toast.makeText(activity, "Wrong old password", Toast.LENGTH_SHORT).show()
+            }
+            else if (username.isEmpty()) {
+                Toast.makeText(activity, "please fill the username field", Toast.LENGTH_SHORT).show()
+            }
+            else if (password != repeatedPass) {
                 Toast.makeText(
                     activity,
                     "password field is not equal to repeated password field",
                     Toast.LENGTH_SHORT
                 ).show()
             } else {
-
+                if(repeatedPass.isEmpty() && password.isEmpty()){
+                    password = currentPassword
+                }else{
+                    SharedPre.setPassword(password)
+                }
                 lifecycleScope.launch(Dispatchers.IO){
+
                     val response = service.editProfileInfo("Bearer ${SharedPre.getText()}",
                         SharedPre.getEmail(),
                         username,
@@ -77,9 +84,12 @@ class EditProfileFragment : Fragment() {
                                 "profile is edited successfully",
                                 Toast.LENGTH_SHORT
                             ).show()
+                            (activity as CoffeeActivity?)?.let {
+                                it.setCurrentUser(User(username, password,SharedPre.getEmail()))
+                            }
                         }
                         parentFragmentManager.beginTransaction().apply {
-                            replace(R.id.fragment_container2,UserProfileFragment())
+                            replace(R.id.fragment_container2, UserProfileFragment())
                             addToBackStack(null)
                             commit()
                         }
@@ -120,21 +130,27 @@ class EditProfileFragment : Fragment() {
         getUserData()
 
     }
-    fun getUserData() {
+    private fun getUserData() {
 
-        lifecycleScope.launch(Dispatchers.IO){
-            val response = service.getUser("Bearer ${SharedPre.getText()}", SharedPre.getEmail())
-            if(response.isSuccessful){
-                val email = response.body()?.email
-                val fullName = response.body()?.username
-                val password = response.body()?.password
-                withContext(Dispatchers.Main){
-                    displayData(User(fullName, password, email))
-                }
-            }else{
-                Log.v("401 ", "onResponse ${response.body()}")
-            }
+        // to get current user from coffee activity
+        (activity as CoffeeActivity?)?.let{
+            displayData(it.getCurrentUser())
         }
+
+    // move this part into coffee activity to call api only once
+//        lifecycleScope.launch(Dispatchers.IO){
+//            val response = service.getUser("Bearer ${SharedPre.getText()}", SharedPre.getEmail())
+//            if(response.isSuccessful){
+//                val email = response.body()?.email
+//                val fullName = response.body()?.username
+//                val password = response.body()?.password
+//                withContext(Dispatchers.Main){
+//                    displayData(User(fullName, password, email))
+//                }
+//            }else{
+//                Log.v("401 ", "onResponse ${response.body()}")
+//            }
+//        }
         /*service.getUser("Bearer ${SharedPre.getText()}", SharedPre.getEmail())
             .enqueue(object : Callback<User> {
                 override fun onResponse(call: Call<User>, response: Response<User>) {
@@ -154,7 +170,7 @@ class EditProfileFragment : Fragment() {
             })*/
     }
 
-    fun displayData(currentUser: User) {
+    private fun displayData(currentUser: User) {
         binding.etEditUsername.setText(currentUser.username)
     }
 

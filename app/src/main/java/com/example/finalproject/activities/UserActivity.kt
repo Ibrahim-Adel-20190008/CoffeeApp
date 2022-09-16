@@ -2,10 +2,8 @@ package com.example.finalproject.activities
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import com.example.finalproject.LoginFragment
+import com.example.finalproject.fragment.LoginFragment
 import com.example.finalproject.R
-import com.example.finalproject.RegisterFragment
-import com.example.finalproject.databinding.ActivityRegisterBinding
 import com.example.finalproject.databinding.ActivityUserBinding
 
 class UserActivity : AppCompatActivity() {
@@ -17,7 +15,7 @@ class UserActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         supportFragmentManager.beginTransaction().apply {
-            replace(R.id.fragment_container,LoginFragment())
+            replace(R.id.fragment_container, LoginFragment())
             commit()
         }
     }

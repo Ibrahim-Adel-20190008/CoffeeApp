@@ -1,4 +1,4 @@
-package com.example.finalproject
+package com.example.finalproject.fragment
 
 import android.os.Bundle
 import android.util.Log
@@ -8,14 +8,12 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.lifecycle.lifecycleScope
+import com.example.finalproject.R
 import com.example.finalproject.api.service
 import com.example.finalproject.dataClasses.User
 import com.example.finalproject.databinding.FragmentRegisterBinding
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
 
 
 class RegisterFragment : Fragment() {
@@ -59,7 +57,7 @@ class RegisterFragment : Fragment() {
                             ).show()
                         }
                         parentFragmentManager.beginTransaction().apply {
-                            replace(R.id.fragment_container,LoginFragment())
+                            replace(R.id.fragment_container, LoginFragment())
                             addToBackStack(null)
                             commit()
                         }

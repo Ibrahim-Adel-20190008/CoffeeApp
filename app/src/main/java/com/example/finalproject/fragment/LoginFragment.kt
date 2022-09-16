@@ -1,4 +1,4 @@
-package com.example.finalproject
+package com.example.finalproject.fragment
 
 import android.content.Intent
 import android.os.Bundle
@@ -11,21 +11,14 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
+import com.example.finalproject.R
 import com.example.finalproject.activities.CoffeeActivity
-import com.example.finalproject.activities.ProductListActivity
-import com.example.finalproject.activities.RegisterActivity
 import com.example.finalproject.api.service
-import com.example.finalproject.dataClasses.LoginResponse
 import com.example.finalproject.dataClasses.User
 import com.example.finalproject.databinding.FragmentLoginBinding
-import com.example.finalproject.databinding.FragmentRegisterBinding
 import com.example.finalproject.localDataBase.SharedPre
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
 
 
 class LoginFragment : Fragment() {
@@ -59,6 +52,7 @@ class LoginFragment : Fragment() {
                     if(response.code()==200){
                         SharedPre.setText(response.body()?.token.toString())
                         SharedPre.setEmail(response.body()?.email)
+                        SharedPre.setPassword(binding.etPassword.text.toString())
                         Log.v(
                             "Logged successfully",
                             "onResponse ${response.body().toString()}"
@@ -115,7 +109,7 @@ class LoginFragment : Fragment() {
         binding.register.setOnClickListener {
             //startActivity(Intent(this, RegisterActivity::class.java))
             parentFragmentManager.beginTransaction().apply {
-                replace(R.id.fragment_container,RegisterFragment())
+                replace(R.id.fragment_container, RegisterFragment())
                 addToBackStack(null)
                 commit()
             }

@@ -1,4 +1,4 @@
-package com.example.finalproject
+package com.example.finalproject.fragment
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -9,6 +9,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
+import com.example.finalproject.R
 import com.example.finalproject.adapters.CartAdapter
 import com.example.finalproject.databinding.FragmentCartBinding
 import com.example.finalproject.localDataBase.SharedList

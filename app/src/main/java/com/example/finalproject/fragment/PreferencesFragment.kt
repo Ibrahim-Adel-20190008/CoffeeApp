@@ -1,4 +1,4 @@
-package com.example.finalproject
+package com.example.finalproject.fragment
 
 import android.os.Bundle
 import android.util.Log
@@ -9,6 +9,7 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.Toast
 import com.bumptech.glide.Glide
+import com.example.finalproject.R
 import com.example.finalproject.dataClasses.CoffeeItem
 import com.example.finalproject.databinding.FragmentPreferencesBinding
 import com.example.finalproject.localDataBase.Item
@@ -171,6 +172,10 @@ class PreferencesFragment : Fragment() {
             totalPriceValue += (number * priceSmall)
         }
         binding.total.text = totalPriceValue.toString()
+    }
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 
 }

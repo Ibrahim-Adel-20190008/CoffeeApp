@@ -32,8 +32,8 @@ interface loginApi {
     @GET("api/user/update/{email}")
     suspend fun editProfileInfo(
         @Header("Authorization") accessToken: String,
-        @Path("email") email: String?, @Query("fullName") fullName: String,
-        @Query("password") password: String
+        @Path("email") email: String?, @Query("fullName") fullName: String?,
+        @Query("password") password: String?
     ): Response<Unit>
 
 }

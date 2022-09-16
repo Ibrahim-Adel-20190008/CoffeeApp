@@ -65,13 +65,27 @@
             android:layout_height="wrap_content"
             app:passwordToggleEnabled="true"
             android:padding="10dp">
-        <EditText
-            android:id="@+id/et_newPassword"
+            <EditText
+                android:id="@+id/et_oldPassword"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:hint="@string/old_password"
+                android:inputType="textPassword"/>
+        </com.google.android.material.textfield.TextInputLayout>
+        <com.google.android.material.textfield.TextInputLayout
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="24dp"
-            android:hint="@string/new_password"
-            android:inputType="textPassword"/>
+            app:passwordToggleEnabled="true"
+            android:padding="10dp">
+            <EditText
+                android:id="@+id/et_newPassword"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:hint="@string/new_password"
+                android:inputType="textPassword"/>
         </com.google.android.material.textfield.TextInputLayout>
         <com.google.android.material.textfield.TextInputLayout
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"

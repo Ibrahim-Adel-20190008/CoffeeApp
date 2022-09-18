@@ -1,18 +1,17 @@
-package com.example.finalproject.api
+package com.example.finalproject.data.api
 
-import com.example.finalproject.dataClasses.CoffeeItem
-import com.example.finalproject.dataClasses.LoginResponse
-import com.example.finalproject.dataClasses.User
+import com.example.finalproject.data.models.CoffeeItem
+import com.example.finalproject.data.models.LoginResponse
+import com.example.finalproject.data.models.User
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
-import retrofit2.Call
 import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.http.*
 
 // https://reqres.in/api/login
-interface loginApi {
+interface ServicesApi {
     @POST("/api/authentication/login")
     suspend fun login(@Body user: User): Response<LoginResponse>
 
@@ -37,15 +36,15 @@ interface loginApi {
     ): Response<Unit>
 
 }
-
-val client = OkHttpClient.Builder()
-    .addInterceptor(HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY))
-    .build()
-
-var retrofit: Retrofit = Retrofit.Builder()
-    .baseUrl("https://coffee-menu123.herokuapp.com")
-    .addConverterFactory(GsonConverterFactory.create())
-    .client(client)
-    .build()
-
-var service: loginApi = retrofit.create(loginApi::class.java)
+//
+//val client = OkHttpClient.Builder()
+//    .addInterceptor(HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY))
+//    .build()
+//
+//var retrofit: Retrofit = Retrofit.Builder()
+//    .baseUrl("https://coffee-menu123.herokuapp.com")
+//    .addConverterFactory(GsonConverterFactory.create())
+//    .client(client)
+//    .build()
+//
+//var service: ServicesApi = retrofit.create(ServicesApi::class.java)

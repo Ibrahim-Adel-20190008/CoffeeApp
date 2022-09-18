@@ -13,9 +13,7 @@ import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.example.finalproject.R
 import com.example.finalproject.adapters.ProductListAdapter
-import com.example.finalproject.api.service
-import com.example.finalproject.dataClasses.CoffeeItem
-import com.example.finalproject.localDataBase.SharedPre
+import com.example.finalproject.data.models.CoffeeItem
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import retrofit2.Call
 import retrofit2.Callback

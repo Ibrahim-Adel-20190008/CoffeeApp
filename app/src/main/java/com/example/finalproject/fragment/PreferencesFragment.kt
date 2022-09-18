@@ -8,13 +8,15 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.Toast
+import androidx.fragment.app.viewModels
 import com.bumptech.glide.Glide
 import com.example.finalproject.R
-import com.example.finalproject.dataClasses.CoffeeItem
+import com.example.finalproject.data.models.CoffeeItem
 import com.example.finalproject.databinding.FragmentPreferencesBinding
 import com.example.finalproject.localDataBase.Item
 import com.example.finalproject.localDataBase.SharedList
 import com.example.finalproject.localDataBase.SharedPre
+import com.example.finalproject.main.viewmodels.PreferencesViewModel
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
 class PreferencesFragment : Fragment() {
@@ -24,11 +26,12 @@ class PreferencesFragment : Fragment() {
     private var sharedList: SharedList = SharedList()
     private var _binding: FragmentPreferencesBinding? = null
     private val binding get() = _binding!!
+    private val viewModel: PreferencesViewModel by viewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         _binding = FragmentPreferencesBinding.inflate(inflater, container, false)
         return binding.root
     }
@@ -45,134 +48,65 @@ class PreferencesFragment : Fragment() {
         binding.total.text = priceSmall.toString()
         Glide.with(this).load(coffeeObject?.urlToImg).into(binding.imgItem)
 
-        activity?.findViewById<BottomNavigationView>(R.id.bottom_nav)?.setVisibility(View.GONE)
-        binding.include.arrowBack.setVisibility(View.VISIBLE)
+        activity?.findViewById<BottomNavigationView>(R.id.bottom_nav)?.visibility = View.GONE
+        binding.include.arrowBack.visibility = View.VISIBLE
         binding.root.findViewById<ImageView>(R.id.arrow_back).setOnClickListener {
             activity?.onBackPressed()
         }
 
+        viewModel.assignBinding(binding,priceSmall)
+        viewModel.calculateTotal()
+        viewModel.defaultSelect()
+
         // increment and decrement button
         binding.incrementView.setOnClickListener {
-            binding.number.text = (binding.number.text.toString().toInt() + 1).toString()
-            binding.itemPrice.text = (binding.itemPrice.text.toString().toDouble() + priceSmall).toString()
-            calculateTotal()
+            viewModel.inc()
         }
         binding.decrementView.setOnClickListener {
             if (binding.number.text.toString().toInt() == 1) {
                 Toast.makeText(activity, "You can't order less than 1 item", Toast.LENGTH_SHORT).show()
             } else {
-                binding.number.text = (binding.number.text.toString().toInt() - 1).toString()
-                binding.itemPrice.text = (binding.itemPrice.text.toString().toDouble() - priceSmall).toString()
-                calculateTotal()
+                viewModel.dec()
             }
         }
+
         // size small, medium, large
         binding.large.setOnClickListener {
-            binding.large.setBackgroundResource(R.drawable.select_item)
-            binding.large.tag = R.drawable.select_item
-            binding.small.setBackgroundResource(R.drawable.non_select_item)
-            binding.small.tag = R.drawable.non_select_item
-            binding.medium.tag = R.drawable.non_select_item
-            binding.medium.setBackgroundResource(R.drawable.non_select_item)
-            calculateTotal()
+            viewModel.selectLarge()
         }
 
         binding.small.setOnClickListener {
-            binding.small.setBackgroundResource(R.drawable.select_item)
-            binding.small.tag = R.drawable.select_item
-            binding.large.setBackgroundResource(R.drawable.non_select_item)
-            binding.large.tag = R.drawable.non_select_item
-            binding.medium.tag = R.drawable.non_select_item
-            binding.medium.setBackgroundResource(R.drawable.non_select_item)
-            calculateTotal()
+            viewModel.selectSmall()
         }
         binding.medium.setOnClickListener {
-            binding.medium.setBackgroundResource(R.drawable.select_item)
-            binding.medium.tag = R.drawable.select_item
-            binding.large.setBackgroundResource(R.drawable.non_select_item)
-            binding.small.tag = R.drawable.non_select_item
-            binding.large.tag = R.drawable.non_select_item
-            binding.small.setBackgroundResource(R.drawable.non_select_item)
-            calculateTotal()
+            viewModel.selectMedium()
         }
 
         // with sugar or without sugar
         binding.sugar.setOnClickListener {
-            binding.noSugar.setBackgroundResource(R.drawable.non_select_item)
-            binding.sugar.setBackgroundResource(R.drawable.select_item)
+            viewModel.selectSugar()
         }
         binding.noSugar.setOnClickListener {
-            binding.noSugar.setBackgroundResource(R.drawable.select_item)
-            binding.sugar.setBackgroundResource(R.drawable.non_select_item)
+            viewModel.selectNoSugar()
         }
 
         // additions (binding.milk, binding.chocolate)
         binding.milk.setOnClickListener {
-            if (binding.milk.tag != null && binding.milk.tag.equals(R.drawable.select_item)) {
-                binding.milk.setBackgroundResource(R.drawable.non_select_item)
-                binding.milk.tag = R.drawable.non_select_item
-            } else {
-                binding.milk.setBackgroundResource(R.drawable.select_item)
-                binding.milk.tag = R.drawable.select_item
-            }
-            calculateTotal()
+            viewModel.selectMilk()
         }
         binding.chocolate.setOnClickListener {
-            if (binding.chocolate.tag != null && binding.chocolate.tag.equals(R.drawable.select_item)) {
-                binding.chocolate.setBackgroundResource(R.drawable.non_select_item)
-                binding.chocolate.tag = R.drawable.non_select_item
-            } else {
-                binding.chocolate.setBackgroundResource(R.drawable.select_item)
-                binding.chocolate.tag = R.drawable.select_item
-            }
-            calculateTotal()
+            viewModel.selectChocolate()
         }
-
+        
         binding.addToCart.setOnClickListener {
-            val item = Item(
-                coffeeObject?.urlToImg,
-                coffeeObject?.name,
-                binding.total.text.toString().toDouble(),
-                binding.number.text.toString().toInt()
-            )
-            sharedList = SharedPre.getUserCart()
-            sharedList.add(item)
-            SharedPre.setUserCart(sharedList)
-            Log.d("@@@", sharedList.getAllItems().toString())
+            viewModel.addToCart(coffeeObject?.urlToImg,coffeeObject?.name,sharedList)
             Toast.makeText(activity, "Successfully Order Check Cart To See It", Toast.LENGTH_SHORT)
                 .show()
             activity?.onBackPressed()
         }
-        // to select default data and calculate total at start
-        defaultSelect()
-        calculateTotal()
-
-    }
-    fun defaultSelect() {
-        binding.small.setBackgroundResource(R.drawable.select_item)
-        binding.noSugar.setBackgroundResource(R.drawable.select_item)
     }
 
-    fun calculateTotal() {
-        val number = binding.number.text.toString().toInt()
-        val additions = 50
-        var totalPriceValue = 0.0
-        if (binding.milk.tag != null && binding.milk.tag.equals(R.drawable.select_item)) {
-            totalPriceValue += (number * additions)
-        }
-        if (binding.chocolate.tag != null && binding.chocolate.tag.equals(R.drawable.select_item)) {
-            totalPriceValue += (number * additions)
-        }
 
-        if (binding.medium.tag != null && binding.medium.tag.equals(R.drawable.select_item)) {
-            totalPriceValue += (number * priceMedium)
-        } else if (binding.large.tag != null && binding.large.tag.equals(R.drawable.select_item)) {
-            totalPriceValue += (number * priceLarge)
-        } else {
-            totalPriceValue += (number * priceSmall)
-        }
-        binding.total.text = totalPriceValue.toString()
-    }
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null

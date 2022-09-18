@@ -7,11 +7,7 @@ import android.widget.EditText
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.finalproject.R
-import com.example.finalproject.api.service
-import com.example.finalproject.dataClasses.User
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
+import com.example.finalproject.data.models.User
 
 class RegisterActivity : AppCompatActivity() {
     var etEmail: EditText? = null

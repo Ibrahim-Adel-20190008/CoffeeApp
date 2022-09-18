@@ -10,7 +10,7 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.bumptech.glide.Glide
 import com.example.finalproject.R
-import com.example.finalproject.dataClasses.CoffeeItem
+import com.example.finalproject.data.models.CoffeeItem
 import com.example.finalproject.localDataBase.Item
 import com.example.finalproject.localDataBase.SharedList
 import com.example.finalproject.localDataBase.SharedPre

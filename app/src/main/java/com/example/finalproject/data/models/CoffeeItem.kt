@@ -1,4 +1,4 @@
-package com.example.finalproject.dataClasses
+package com.example.finalproject.data.models
 
 import android.os.Parcel
 import android.os.Parcelable

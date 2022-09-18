@@ -1,7 +1,6 @@
 package com.example.finalproject.localDataBase
 
 import android.content.SharedPreferences
-import com.example.finalproject.dataClasses.User
 import com.google.gson.Gson
 import kotlin.random.Random
 

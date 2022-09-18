@@ -2,7 +2,6 @@ package com.example.finalproject.activities
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.view.MenuItem
 import android.widget.Button
 import android.widget.ImageView
@@ -10,13 +9,9 @@ import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import com.bumptech.glide.Glide
 import com.example.finalproject.R
-import com.example.finalproject.dataClasses.User
+import com.example.finalproject.data.models.User
 import com.example.finalproject.localDataBase.SharedPre
-import com.example.finalproject.api.service
 import com.google.android.material.bottomnavigation.BottomNavigationView
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
 
 class UserProfileActivity : AppCompatActivity(),
     BottomNavigationView.OnNavigationItemSelectedListener {

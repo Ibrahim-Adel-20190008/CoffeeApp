@@ -8,7 +8,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.finalproject.R
-import com.example.finalproject.dataClasses.CoffeeItem
+import com.example.finalproject.data.models.CoffeeItem
 
 class ProductListAdapter(var listener: onListener) :
     RecyclerView.Adapter<ProductListAdapter.ViewHolder>() {

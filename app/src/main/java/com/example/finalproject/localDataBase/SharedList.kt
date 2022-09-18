@@ -12,6 +12,9 @@ class SharedList {
     fun add(item: Item) {
         items?.add(item)
     }
+    fun addAll(items: ArrayList<Item>?) {
+        items?.addAll(items)
+    }
 
     fun removeAt(index:Int){
         items?.removeAt(index)

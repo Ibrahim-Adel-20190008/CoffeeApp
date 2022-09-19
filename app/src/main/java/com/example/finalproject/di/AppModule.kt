@@ -1,8 +1,8 @@
 package com.example.finalproject.di
 
-import com.example.finalproject.data.api.ServicesApi
-import com.example.finalproject.main.DefaultMainRepository
-import com.example.finalproject.main.MainRepository
+import com.example.finalproject.dataBase.remoteDB.api.ServicesApi
+import com.example.finalproject.domain.RepositoryImp
+import com.example.finalproject.domain.Repository
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -29,6 +29,6 @@ object AppModule {
     @Singleton
     @Provides
     fun providerMainRepository(api: ServicesApi):
-            MainRepository = DefaultMainRepository(api)
+            Repository = RepositoryImp(api)
 
 }

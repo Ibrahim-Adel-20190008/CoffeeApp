@@ -13,6 +13,7 @@ import com.example.finalproject.databinding.FragmentEditProfileBinding
 import com.example.finalproject.dataBase.localDB.SharedPre
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import dagger.hilt.android.AndroidEntryPoint
+import java.util.regex.Pattern
 
 @AndroidEntryPoint
 class EditProfileFragment : Fragment() {
@@ -52,6 +53,13 @@ class EditProfileFragment : Fragment() {
             }
             else if (username.isEmpty()) {
                 Toast.makeText(activity, "please fill the username field", Toast.LENGTH_SHORT).show()
+            } else if (!isValidPassword(password)){
+                Toast.makeText(
+                    activity,
+                    "make sure password contains at least 1 uppercase letter, 1 lowercase letter, 1 digit, 1 special character and minimum 4 characters",
+                    Toast.LENGTH_LONG
+                ).show()
+
             }
             else if (password != repeatedPass) {
                 Toast.makeText(
@@ -66,6 +74,11 @@ class EditProfileFragment : Fragment() {
                 activity?.let { it1 -> viewModel.confirmChange(username,password, it1,this) }
             }
         }
+    }
+    fun isValidPassword(pass : String): Boolean{
+        //at least 1 uppercase letter, at least 1 lowercase letter , at least 1 digit,at least1 special character ,minimum 4 characters and max is 24
+        val matcher = Pattern.compile("((?=.*[a-z])(?=.*\\d)(?=.*[A-Z])(?=.*[@#?$%!]).{4,24})").matcher(pass)
+        return matcher.matches()
     }
 
     override fun onDestroyView() {

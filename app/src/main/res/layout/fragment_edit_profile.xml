@@ -3,8 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".activities.EditProfileActivity">
+    android:layout_height="match_parent">
 
     <include
         android:id="@+id/include"
@@ -50,6 +49,8 @@
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            app:counterEnabled="true"
+            app:counterMaxLength="24"
             android:padding="10dp">
         <EditText
             android:id="@+id/et_editUsername"
@@ -57,6 +58,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="40dp"
             android:hint="@string/username"
+            android:maxLength="24"
             android:inputType="textEmailAddress" />
         </com.google.android.material.textfield.TextInputLayout>
         <com.google.android.material.textfield.TextInputLayout
@@ -64,6 +66,10 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:passwordToggleEnabled="true"
+            app:helperText="Required"
+            app:helperTextTextColor="@color/red"
+            app:counterEnabled="true"
+            app:counterMaxLength="24"
             android:padding="10dp">
             <EditText
                 android:id="@+id/et_oldPassword"
@@ -71,6 +77,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="24dp"
                 android:hint="@string/old_password"
+                android:maxLength="24"
+
                 android:inputType="textPassword"/>
         </com.google.android.material.textfield.TextInputLayout>
         <com.google.android.material.textfield.TextInputLayout
@@ -78,6 +86,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:passwordToggleEnabled="true"
+            app:counterEnabled="true"
+            app:counterMaxLength="24"
             android:padding="10dp">
             <EditText
                 android:id="@+id/et_newPassword"
@@ -85,6 +95,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="24dp"
                 android:hint="@string/new_password"
+                android:maxLength="24"
                 android:inputType="textPassword"/>
         </com.google.android.material.textfield.TextInputLayout>
         <com.google.android.material.textfield.TextInputLayout
@@ -92,6 +103,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:passwordToggleEnabled="true"
+            app:counterEnabled="true"
+            app:counterMaxLength="24"
             android:padding="10dp">
         <EditText
             android:id="@+id/et_repeatNewPass"
@@ -99,6 +112,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="24dp"
             android:hint="@string/confirm_new_password"
+            android:maxLength="24"
             android:inputType="textPassword" />
         </com.google.android.material.textfield.TextInputLayout>
 

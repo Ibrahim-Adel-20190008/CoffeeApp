@@ -51,12 +51,12 @@
             android:layout_height="wrap_content"
             app:counterEnabled="true"
             app:counterMaxLength="24"
-            android:padding="10dp">
+            android:paddingEnd="10dp"
+            android:paddingStart="10dp">
         <EditText
             android:id="@+id/et_editUsername"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="40dp"
             android:hint="@string/username"
             android:maxLength="24"
             android:inputType="textEmailAddress" />
@@ -70,12 +70,12 @@
             app:helperTextTextColor="@color/red"
             app:counterEnabled="true"
             app:counterMaxLength="24"
-            android:padding="10dp">
+            android:paddingEnd="10dp"
+            android:paddingStart="10dp">
             <EditText
                 android:id="@+id/et_oldPassword"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="24dp"
                 android:hint="@string/old_password"
                 android:maxLength="24"
 
@@ -88,12 +88,12 @@
             app:passwordToggleEnabled="true"
             app:counterEnabled="true"
             app:counterMaxLength="24"
-            android:padding="10dp">
+            android:paddingEnd="10dp"
+            android:paddingStart="10dp">
             <EditText
                 android:id="@+id/et_newPassword"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="24dp"
                 android:hint="@string/new_password"
                 android:maxLength="24"
                 android:inputType="textPassword"/>
@@ -105,12 +105,12 @@
             app:passwordToggleEnabled="true"
             app:counterEnabled="true"
             app:counterMaxLength="24"
-            android:padding="10dp">
+            android:paddingEnd="10dp"
+            android:paddingStart="10dp">
         <EditText
             android:id="@+id/et_repeatNewPass"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="24dp"
             android:hint="@string/confirm_new_password"
             android:maxLength="24"
             android:inputType="textPassword" />
@@ -131,6 +131,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/linear_data"
         app:layout_constraintVertical_bias="0.48"
-        tools:layout_editor_absoluteX="0dp" />
+        tools:layout_editor_absoluteX="0dp"
+        />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -29,13 +29,4 @@ interface Repository {
 
     suspend fun setPassword(password: String)
 
-//    suspend fun getEmail(): String?
-
-//    suspend fun getUserCart(): SharedList
-
-//    suspend fun getUrl(): String?
-
-//    suspend fun getPassword(): String?
-//    suspend fun getToken(): String?
-
 }

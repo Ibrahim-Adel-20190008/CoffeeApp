@@ -75,7 +75,7 @@ class EditProfileFragment : Fragment() {
             }
         }
     }
-    fun isValidPassword(pass : String): Boolean{
+    private fun isValidPassword(pass : String): Boolean{
         //at least 1 uppercase letter, at least 1 lowercase letter , at least 1 digit,at least1 special character ,minimum 4 characters and max is 24
         val matcher = Pattern.compile("((?=.*[a-z])(?=.*\\d)(?=.*[A-Z])(?=.*[@#?$%!]).{4,24})").matcher(pass)
         return matcher.matches()

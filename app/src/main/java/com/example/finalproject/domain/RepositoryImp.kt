@@ -120,23 +120,5 @@ class RepositoryImp @Inject constructor(
         SharedPre.setPassword(password)
     }
 
-//    override suspend fun getToken(): String? {
-//        return SharedPre.getText()
-//    }
-//    override suspend fun getEmail(): String? {
-//        return SharedPre.getEmail()
-//    }
-//
-//    override suspend fun getUserCart(): SharedList {
-//        return SharedPre.getUserCart()
-//    }
-//
-//    override suspend fun getUrl(): String? {
-//        return SharedPre.getUrl()
-//    }
-//    override suspend fun getPassword(): String? {
-//        return SharedPre.getPassword()
-//    }
-
 
 }

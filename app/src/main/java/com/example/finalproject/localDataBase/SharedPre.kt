@@ -47,8 +47,9 @@ object SharedPre {
         // Replace :sprites with male, female, human, identicon, initials, bottts, avataaars, jdenticon, gridy or micah.
         // The value of :seed can be anything you like - but don't use any sensitive or personal data here!
         val imgNumber : Int = Random.nextInt(-100000,100000)
-        val category = "avataaars"
-        val urlToImg = "https://avatars.dicebear.com/api/${category}/${imgNumber}.png"
+        val category = "male"
+        //val urlToImg = "https://avatars.dicebear.com/api/${category}/${imgNumber}.png"
+        val urlToImg = "https://xsgames.co/randomusers/avatar.php?g=male"
         sharedPre?.edit()?.putString("urlToImg ${getEmail()}",urlToImg)?.apply()
     }
 
